@@ -1,7 +1,13 @@
+@font-face{
+    font-family: myfont;
+    src: url(1.otf);
+}
+
 * {
     margin: 0;
     padding: 0;
     text-align: center;
+    font-family: myfont;
   }
 
   #canvas {
@@ -48,7 +54,7 @@
     right: 0;
     left: 0;
     margin: auto;
-    color: white;
+    /* color: white; */
   }
 
   #easy,
