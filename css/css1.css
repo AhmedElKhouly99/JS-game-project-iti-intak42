@@ -38,8 +38,9 @@
     overflow: hidden;
   }
 
-  #difficulty img {
+  .template img {
     width: 30%;
+    height: 485px;
     position: absolute;
     right: 0;
     left: 0;
@@ -48,7 +49,7 @@
     margin: auto;
   }
 
-  #difficulty #header {
+  .template #header {
     position: absolute;
     top: 100px;
     right: 0;
