@@ -48,13 +48,14 @@
     margin: auto;
   }
 
-  #difficulty h2 {
+  #difficulty #header {
     position: absolute;
     top: 100px;
     right: 0;
     left: 0;
     margin: auto;
-    /* color: white; */
+    font-size: xx-large;
+    color: white;
   }
 
   #easy,
