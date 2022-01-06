@@ -36,6 +36,7 @@
     top: 0;
     margin: auto;
     overflow: hidden;
+    
   }
 
   .template img {
@@ -47,6 +48,7 @@
     top: 0;
     bottom: 0;
     margin: auto;
+    
   }
 
   .template #header {
