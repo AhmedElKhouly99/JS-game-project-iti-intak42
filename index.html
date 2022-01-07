@@ -7,20 +7,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/css1.css">
-  <title>Document</title>
+  <title>JS Game Project</title>
 </head>
 
 <body>
   <canvas id="canvas"></canvas>
   <div id="container">
-    <div id="difficulty" class="template">
-      <img class="" src="images/PNG/Level_Menu/Window.png" alt="">
+    <img style="width: 5%; float: left;cursor: pointer;" class="menu" id="How_To_Play" src="images/Info_BTN.png">
+        <img onclick="removeMenu();displayTemplate(settings);" style="width: 5%; float: right;cursor: pointer;" class="menu" id="Settings" src="images/Settings_BTN.png">
+        <img style="width: 20%;padding-top: 10%;width: 30%;" class="menu" id="Exit" src="images/Header.png">
+        <br>
+        <img onclick="removeMenu();displayTemplate(difficulty)" style="width: 20%;cursor: pointer;padding-top: 7%;" class="menu" id="Play" src="images/Start_BTN.png">
+        <br>
+        <img onclick="window.close();" style="width: 20%;cursor: pointer;" class="menu" id="Exit" src="images/Exit_BTN.png">
+        <br>
+        <img style="width: 5%; float: left;cursor: pointer;" class="menu" id="How_To_Play" src="images/Rating_BTN.png">
+        <img style="width: 5%; float: right;cursor: pointer;" class="menu" id="Settings" src="images/Facebook_BTN.png">
+
+
+    <div id="difficulty" class="template" style="display: none;">
+      <img class="" src="images/Window.png" alt="">
       <p class="" id="header">Difficulty</p>
-      <p class="" id="easy">Easy</p>
-      <p class="" id="medium">Medium</p>
-      <p class="" id="hard">Hard</p>
+      <p onclick="removeTemplate(difficulty);removeDiv(this);" class="" id="easy">Easy</p>
+      <p onclick="removeTemplate(difficulty);removeDiv(this);" class="" id="medium">Medium</p>
+      <p onclick="removeTemplate(difficulty);removeDiv(this);" class="" id="hard">Hard</p>
     </div>
+
+    <div id="settings" class="template" style="display: none;">
+      <img class="" src="images/Window.png" alt="">
+      <p class="" id="header">Settings</p>
+      <img id="sound"src="images/Sound_BTN.png" alt="">
+      <p id="sound_btn">Game Sound</p>
+      <img id="music" src="images/Music_BTN.png" alt="">
+      <p id="music_btn">Music</p>
+      <img onclick="removeTemplate(settings);displayMenu();" id="ok" src="images/Ok_BTN.png" alt="">
+    </div>
+
+
   </div>
+
+<script>
+  const container = document.getElementById("container");
+  const mainMenu = document.getElementsByClassName('menu');
+  const difficulty = document.getElementById('difficulty');
+  const settings = document.getElementById('settings');
+  let level = 1;
+
+  function removeMenu(){
+    for(let i = 0; i<mainMenu.length; i++){
+      mainMenu[i].style.display = 'none';
+    }
+  }
+
+  function displayMenu(){
+    for(let i = 0; i<mainMenu.length; i++){
+      mainMenu[i].style.display = 'inline';
+    }
+  }
+
+  function diplayDifficulty(){
+    difficulty.style.display='block';
+    difficulty.classList.remove('up');
+  }
+
+  function displayTemplate(p){
+    p.style.display='block';
+      for(let i = 0; i<p.children.length; i++){
+        p.children[i].classList.remove('up');
+        p.children[i].classList.add('in');
+      }
+
+  }
+  
+  function removeTemplate(p){
+      for(let i = 0; i<p.children.length; i++){
+        p.children[i].classList.add('up');
+        p.children[i].classList.remove('in');
+      }
+
+  }
+
+  function removeDiv(l){
+    setTimeout(()=>{container.style.display = "none";},800);
+    ID = level.id;
+    if(ID == 1){
+      level = 1;
+    }else if(ID == 2){
+      level = 2;
+    }else{
+      level = 3;
+    }
+  }
+
+
+
+</script>
+
+
+
 </body>
 
 </html>
