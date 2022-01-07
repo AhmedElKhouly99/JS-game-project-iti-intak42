@@ -1,6 +1,6 @@
 @font-face{
     font-family: myfont;
-    src: url(1.otf);
+    src: url(2.ttf);
 }
 
 * {
@@ -56,7 +56,8 @@
     left: 0;
     margin: auto;
     font-size: xx-large;
-    color: white;
+    color: #e3f5f4;
+    /* color: #e84545; */
   }
 
   #easy,
@@ -73,6 +74,11 @@
     border-radius: 12px;
     padding: 1%;
   }
+#difficulty  p:not(#header):hover{
+  box-shadow:0px 0px 15px 0px red;
+  color: red;
+  cursor: pointer;
+}
 
   #medium {
     top: 325px;
@@ -80,4 +86,49 @@
 
   #hard {
     top: 442px;
+  }
+
+  #sound, #music, #ok, #mute{
+    width: 75px;
+    height: 75px;
+  }
+
+  #sound{
+    position: absolute;
+    top: -180px;
+    left: -288px;
+  }
+  #music{
+    position: absolute;
+    top: 60px;
+    left: -288px;
+  }
+
+  #ok{
+    position: absolute;
+    top: 355px;
+  }
+
+  #mute{
+    position: absolute;
+    top: 0;
+  }
+  #settings p{
+    left: 635px;
+    font-size: x-large;
+    color: red;
+    position: absolute;
+  }
+  #settings img:hover + p:not(#header){
+    box-shadow:10px 0px 25px 5px #e3f5f4;
+    font-size: 30px;
+    padding: 0.2%;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  #sound_btn{
+    top: 226px;
+  }
+  #music_btn{
+    top: 350px;
   }
