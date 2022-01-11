@@ -1,6 +1,6 @@
 .up {
-	-webkit-animation: up 0.8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-	        animation: up 0.8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	-webkit-animation: up 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: up 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 @-webkit-keyframes up {

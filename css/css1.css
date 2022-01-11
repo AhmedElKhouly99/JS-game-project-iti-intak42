@@ -9,10 +9,13 @@
     text-align: center;
     font-family: myfont;
   }
+  .template{
+    overflow: hidden;
+  }
 
   #canvas {
-    width: 1450px;
-    height: 664px;
+    width: 90%;
+    height: 90%;
     max-height: 664px;
     background-color: blue;
     position: fixed;
@@ -25,9 +28,9 @@
   }
 
   #container {
-    width: 1450px;
-    height: 664px;
-    background-color: yellow;
+    width: 90%;
+    height: 90%;
+    /* background-color: yellow; */
     position: absolute;
     z-index: 99;
     left: 0;
@@ -38,6 +41,18 @@
     overflow: hidden;
     
   }
+
+   /* .background {
+    width: 30%;
+    height: 485px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }  */
+  
 
   .template img {
     width: 30%;
@@ -50,8 +65,9 @@
     margin: auto;
     
   }
+  
 
-  .template #header {
+  .template #header, #pause-header {
     position: absolute;
     top: 100px;
     right: 0;
@@ -60,6 +76,10 @@
     font-size: xx-large;
     color: #e3f5f4;
     /* color: #e84545; */
+  }
+
+  #Play, #Exit{
+    margin-bottom: 2.2%;
   }
 
   #easy,
@@ -115,6 +135,9 @@
     position: absolute;
     top: 0;
   }
+  /* #settings{
+    position:fixed;
+  } */
   #settings p{
     left: 635px;
     font-size: x-large;
@@ -133,4 +156,115 @@
   }
   #music_btn{
     top: 350px;
+  }
+
+  /* #pause-header {
+    position: absolute;
+    top: 106px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width:13%;
+  } */
+  #score-box {
+    position: absolute;
+    top: -85px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width:23%;
+    height: 90px;
+  }
+
+  #score-content{
+    position: absolute;
+    top: 263px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    font-size: xx-large;
+    color: white;
+    
+
+  }
+
+  #score-p{
+    position: absolute;
+    top: 343px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 21%;
+    font-size: xx-large;
+    font-family: myfont;
+    color: white;
+  }
+
+  .icon{
+    width: 75px;
+    height: 75px;
+  }
+  
+  #how-to-play #how-menu-btn {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    right: 0;
+    top: 52%;
+    cursor: pointer;
+ 
+  }
+  
+  #restart-img, #setting-img, #menu-img, #close-img{
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    right: 865px;
+    top: 52%;
+    cursor: pointer;
+  }
+
+  #restart-img {
+    left: 36.5%;
+  }
+  #setting-img {
+    left: 43.5%;
+  }
+  #menu-img {
+    
+    left: 50.5%;
+    
+  }
+  #close-img {
+    left: 57.5%;
+  }
+  #game-img{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top:16%;
+    background-image: url("gameimg.jpg");
+    background-size: contain;
+    width: 23%;
+    height: 150px;
+    margin: auto;
+    border-radius: 12px;
+    padding: 1%;
+  }
+  #game-steps{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top:48%;
+    background-color: lightcoral;
+    width: 23%;
+    margin: auto;
+  }
+  #game-steps ul li{
+    text-align: initial;
+  }
+  #how-to-play #menu-img {
+    left: 0;
+    right: 0;
+    margin: auto;
   }
