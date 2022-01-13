@@ -1,3 +1,5 @@
+
+
 const container = document.getElementById("container");
 const mainMenu = document.getElementsByClassName('menu');
 const difficulty = document.getElementById('difficulty');
@@ -5,9 +7,21 @@ const settings = document.getElementById('settings');
 const info = document.getElementById('how-to-play');
 const pause = document.getElementById('pause-div');
 const music = new Audio('m.mp3');
+const b = new Audio('b.wav');
+const c = new Audio('c.wav');
 music.setAttribute('loop', 'true');
-let setting_menu = false;
 let level = 1;
+let setting_menu = false;
+
+
+function playMusic() {
+    music.play();
+}
+
+function playBird() {
+    b.setAttribute('loop', 'true');
+    b.play();
+}
 
 function mouseOver(btn, source) {
     btn.src = source;
@@ -24,10 +38,6 @@ function removeMenu() {
 
 function displayMenu() {
     if (setting_menu) {
-    //     // for (let i = 0; i < settings.children.length; i++) {
-    //     //     settings.children[i].classList.add('up');
-    //     //     settings.children[i].classList.remove('in');
-    //     // }
         removeTemplate(settings)
         displayTemplate(pause);
     } else {
@@ -37,10 +47,6 @@ function displayMenu() {
     }
 }
 
-function diplayDifficulty() {
-    difficulty.style.display = 'block';
-    difficulty.classList.remove('up');
-}
 
 function displayTemplate(p) {
     p.style.display = 'block';
@@ -65,8 +71,7 @@ function removeDiv(level) {
     setTimeout(() => { container.style.display = "none"; }, 700);
     difficulty.style.display = 'none';
     play = true;
-    // displayTemplate(pause);
-    // pause.style.display='block';
+    playBird();
     ID = level.id;
     if (ID == 1) {
         level = 1;
@@ -75,13 +80,34 @@ function removeDiv(level) {
     } else {
         level = 3;
     }
+
 }
 
-document.getElementById('menu-img').addEventListener('click', ()=>{
-    setting_menu = false;
-    console.log(setting_menu);
-    removeTemplate(pause);
-    displayMenu();
+document.getElementById('menu-img').addEventListener('click', () => {
+    if (confirm("Are You Sure !?")) {
+        setting_menu = false;
+        console.log(setting_menu);
+        removeTemplate(pause);
+        displayMenu();
+    }
+});
+
+document.getElementById('sound').addEventListener('click', () => {
+    if (b.muted) {
+        b.muted = false;
+        c.muted = false;
+    } else {
+        b.muted = true;
+        c.muted = true
+    }
+});
+
+document.getElementById('music').addEventListener('click', () => {
+    if (music.muted) {
+        music.muted = false;
+    } else {
+        music.muted = true;
+    }
 });
 
 
@@ -103,8 +129,9 @@ var bullets = [];
 
 class Bird {
     constructor() {
-        this.width = 50;
-        this.height = 50;
+        /////////////////////////////////
+        this.width = 80;
+        this.height = 80;
         this.speedX = 3;
         this.speedY = 2;
         this.currentX = canvasWidth;
@@ -285,14 +312,16 @@ window.addEventListener('focus', () => {
 window.addEventListener('blur', () => {
     console.log("Pausing");
     container.style.display = 'block';
-    displayTemplate(pause);
+    b.pause();
+    if (setting_menu) {
+        displayTemplate(pause);
+    }
     play = false;//to pause game
 });
 
 
 
 function updateScore() {
-
     artArea.fillStyle = "black";
     artArea.font = "30px";
     artArea.fillText('score:' + score, 50, 50);

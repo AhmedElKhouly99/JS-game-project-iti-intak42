@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="dist/sweetalert2.min.css">
   <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/css1.css">
   <title>JS Game Project</title>
@@ -13,34 +14,34 @@
 <body>
   <canvas id="canvas" width="1450px" height="664px"></canvas>
   <div id="container">
-    <img onclick="removeMenu();displayTemplate(info);" style="width: 5%; float: left;cursor: pointer;" class="menu" id="How_To_Play" src="images/Info_BTN.png">
-        <img onclick="removeMenu();displayTemplate(settings);" style="width: 5%; float: right;cursor: pointer;" class="menu" id="Settings" src="images/Settings_BTN.png">
+      <img onclick="c.play();removeMenu();displayTemplate(info);" style="width: 5%; float: left;cursor: pointer;" class="menu" id="How_To_Play" src="images/Info_BTN.png">
+        <img onclick="c.play();removeMenu();displayTemplate(settings);" style="width: 5%; float: right;cursor: pointer;" class="menu" id="Settings" src="images/Settings_BTN.png">
         <img style="width: 20%;padding-top: 10%;width: 30%;" class="menu" id="Exit" src="images/Header.png">
         <br>
-        <img onclick="removeMenu();displayTemplate(difficulty);music.play();" style="width: 20%;cursor: pointer;" class="menu" id="Play" src="images/Start_BTN.png">
+        <img onclick="c.play();removeMenu();displayTemplate(difficulty);music.play();" style="width: 20%;cursor: pointer;" class="menu" id="Play" src="images/Start_BTN.png">
         <br>
-        <img onclick="window.close();" style="width: 20%;cursor: pointer;" class="menu" id="Exit" src="images/Exit_BTN.png">
+        <img onclick="c.play();window.close();" style="width: 20%;cursor: pointer;" class="menu" id="Exit" src="images/Exit_BTN.png">
         <br>
-        <img style="width: 5%; float: left;cursor: pointer;" class="menu" id="How_To_Play" src="images/Rating_BTN.png">
-        <img style="width: 5%; float: right;cursor: pointer;" class="menu" id="Settings" src="images/Facebook_BTN.png">
+        <img style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;" class="menu" id="How_To_Play" src="images/Rating_BTN.png">
+        <img style="width: 5%; float: right;cursor: pointer;position: absolute;bottom: 0%;right: 0;" class="menu" id="Settings" src="images/Facebook_BTN.png">
 
 
     <div id="difficulty" class="template" style="display: none;">
       <img class="background"  src="images/Window.png" alt="">
       <p class="" id="header">Difficulty</p>
-      <p onclick="removeTemplate(difficulty);removeDiv(this);" class="" id="easy">Easy</p>
-      <p onclick="removeTemplate(difficulty);removeDiv(this);" class="" id="medium">Medium</p>
-      <p onclick="removeTemplate(difficulty);removeDiv(this);" class="" id="hard">Hard</p>
+      <p onclick="c.play();removeTemplate(difficulty);removeDiv(this);" class="" id="easy">Easy</p>
+      <p onclick="c.play();removeTemplate(difficulty);removeDiv(this);" class="" id="medium">Medium</p>
+      <p onclick="c.play();removeTemplate(difficulty);removeDiv(this);" class="" id="hard">Hard</p>
     </div>
 
     <div id="settings" class="template" style="display: none;">
       <img class="background" id="" src="images/Window.png" alt="">
       <p class="" id="header">Settings</p>
-      <img id="sound"src="images/Sound_BTN.png" alt="">
+      <img onclick="c.play();" onmouseover="mouseOver(this,'images/Sound_BTN_active.png')" onmouseout="mouseOut(this,'images/Sound_BTN.png')" id="sound"src="images/Sound_BTN.png" alt="">
       <p id="sound_btn">Sound</p>
-      <img id="music" src="images/Music_BTN.png" alt="">
+      <img onclick="c.play();" onmouseover="mouseOver(this,'images/Music_BTN_active.png')" onmouseout="mouseOut(this,'images/Music_BTN.png')" id="music" src="images/Music_BTN.png" alt="">
       <p id="music_btn">Music</p>
-      <img onclick="removeTemplate(settings);displayMenu();" id="ok" src="images/Ok_BTN.png" alt="">
+      <img onclick="c.play();removeTemplate(settings);displayMenu();" id="ok" src="images/Ok_BTN.png" alt="">
     </div>
 
     <div id="how-to-play" class="template" style="display: none;" >
@@ -56,7 +57,7 @@
           <li>Milk</li>
         </ul>
       </div>
-      <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')" onclick="removeTemplate(info);displayMenu();" class="" id="how-menu-btn" src="images\PNG\Rating\Menu_BTN.png" alt="">
+      <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')" onclick="c.play();removeTemplate(info);displayMenu();" class="" id="how-menu-btn" src="images\PNG\Rating\Menu_BTN.png" alt="">
     </div>
 
     <div id="pause-div" class="template" style="display: none;" >
@@ -69,9 +70,9 @@
       <p id="score-p">Your Score</p> 
 
       <img onmouseover="mouseOver(this,'images/Replay_BTN-active.png')" onmouseout="mouseOut(this,'images/Replay_BTN.png')"  class="icon" id="restart-img" src="images\Replay_BTN.png" alt="">
-      <img onmouseover="mouseOver(this,'images/Settings_BTN-active.png')" onmouseout="mouseOut(this,'images/Settings_BTN.png')" onclick="removeTemplate(pause);displayTemplate(settings);" class="icon" id="setting-img" src="images\Settings_BTN.png" alt="">
-      <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')" onclick="play = false;" class="icon" id="menu-img" src="images\Menu_BTN.png" alt="">
-      <img onmouseover="mouseOver(this,'images/Close_BTN-acive.png')" onmouseout="mouseOut(this,'images/Close_BTN.png')" class="icon" id="close-img" src="images\Close_BTN.png" alt="">
+      <img onmouseover="mouseOver(this,'images/Settings_BTN-active.png')" onmouseout="mouseOut(this,'images/Settings_BTN.png')" onclick="c.play();removeTemplate(pause);displayTemplate(settings);" class="icon" id="setting-img" src="images\Settings_BTN.png" alt="">
+      <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')" onclick="c.play();play = false;" class="icon" id="menu-img" src="images\Menu_BTN.png" alt="">
+      <img onmouseover="mouseOver(this,'images/Close_BTN-acive.png')" onmouseout="mouseOut(this,'images/Close_BTN.png')" onclick="c.play();removeTemplate(pause);b.play();play = true;" class="icon" id="close-img" src="images\Close_BTN.png" alt="">
     </div>
 
   </div>
@@ -155,6 +156,7 @@
 
 </script>
 <script src="game.js"></script>
+
 
 
 
