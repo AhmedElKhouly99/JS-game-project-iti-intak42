@@ -126,6 +126,9 @@ let score = 0;
 var birds = [];
 var bullets = [];
 
+var keyFlags = {'w' : false, 's' : false, 'a' : false, 'd' : false, ' ' : false, 'Shift' : false, 'ArrowUp' : false, 'ArrowDown' : false, 'ArrowLeft' : false, 'ArrowRight' : false};
+
+const delayBetweenFire = 200;
 
 class Bird {
     constructor() {
@@ -161,18 +164,70 @@ class Bird {
 
 
 class Player {
-    constructor() {
+    constructor(controllers) {
         this.width = 110;
         this.height = 100;
-        this.currentX = canvasWidth / 2;
-        this.currentY = canvasHeight - this.height - 10;
-        this.speedX = 100;
+        this.currentX = 5;
+        this.currentY = (canvasHeight - this.height) / 2;
+        this.speedX = 0;
         this.speedY = 10;
         this.playerImage = new Image();
         this.playerImage.src = 'player2.png';
+
+        this.movingLeft = false;
+        this.movingRight = false;
+        this.movingUp = false;
+        this.movingDown = false;
+        this.firing = false;
+        this.canFire = true;
+        this.controllers = controllers;
     }
+
+    updateControllersStates(){
+        this.movingUp = keyFlags[this.controllers.up];
+        this.movingDown = keyFlags[this.controllers.down];
+        this.movingRight = keyFlags[this.controllers.right];
+        this.movingLeft = keyFlags[this.controllers.left];
+        this.firing = keyFlags[this.controllers.fire];
+        
+    }
+
+    updateState(){
+        this.updateControllersStates();
+        //Move if moving and fire if firing
+        
+        console.log(keyFlags);
+        console.log("Right: " + this.movingRight);
+        console.log("Left: " + this.movingLeft);
+        console.log("Up: " + this.movingUp);
+        console.log("down: " + this.movingDown);
+        
+
+
+        if(this.movingUp){
+            this.moveUp();
+        }
+        if(this.movingDown){
+            this.moveDown();
+        }
+        if(this.movingRight){
+            
+            this.moveRight();
+        }
+        if(this.movingLeft){
+            this.moveLeft();
+        }
+        if(this.firing){
+            if(this.canFire){
+                this.fire();
+                this.canFire = false;
+                setTimeout(() => {this.canFire = true}, delayBetweenFire);
+            }
+        }
+    }
+
     fire() {
-        console.log("Firing");
+        console.log("Firing a Bullet");
         bullets.push(new Bullet(this));
     }
     moveRight() {
@@ -185,6 +240,16 @@ class Player {
         this.currentX = Math.max(this.currentX - this.speedX, 0);
 
     }
+    moveUp(){
+        this.currentY = Math.max(this.currentY - this.speedY, 0);
+        console.log("Moving Up");
+    }
+    
+    moveDown(){
+        this.currentY = Math.min(this.currentY + this.speedY, canvasHeight - this.height);
+        console.log("Moving Down");
+    }
+
     draw() {
 
         artArea.drawImage(this.playerImage, this.currentX, this.currentY, this.width, this.height);
@@ -193,7 +258,15 @@ class Player {
 
 
 }
-var p = new Player();//creating player from player class
+
+
+const player1Conrollers = {up:'ArrowUp', down:'ArrowDown', right:'ArrowRight', left : 'ArrowLeft', fire : ' '};
+const player2Conrollers = {up:'w', down:'s', right:'d', left : 'a', fire : 'Shift'};
+
+
+
+var p = new Player(player1Conrollers);//creating player from player class
+var p2 = new Player(player2Conrollers);
 
 
 class Bullet {
@@ -201,8 +274,8 @@ class Bullet {
         this.width = 30;
         this.height = 40;
         this.currentX = player.currentX + Math.floor(player.width / 2.6);
-        this.speedX = 0;
-        this.speedY = 10;
+        this.speedX = 10;
+        this.speedY = 0;
         this.currentY = player.currentY - this.height + this.speedY;
         this.hitBird = false;
         this.crossedHiegt = false;
@@ -225,7 +298,7 @@ class Bullet {
 
 
 
-setInterval(test, 30);//generate  new frame every 30ms
+setInterval(test, 25);//generate  new frame every 30ms
 
 
 function test() {
@@ -236,7 +309,11 @@ function test() {
     detectBirdCollision();
     filtering();
     updateScore();
+    p.updateState();
     p.draw();
+
+    p2.updateState();
+    p2.draw();
 
     [...birds, ...bullets].forEach((bird) => { bird.move(); bird.draw(); })//instead of using two lines
 
@@ -309,6 +386,8 @@ window.addEventListener('focus', () => {
     // play = true;//to resume game 
 });
 
+
+
 window.addEventListener('blur', () => {
     console.log("Pausing");
     container.style.display = 'block';
@@ -330,9 +409,32 @@ function updateScore() {
 
 
 
+
+
+
 //control player movement
 window.addEventListener('keydown', (e) => {
 
+    console.log(e.key);
+
+
+/*     if((e.key == p.controllers.fire) && (keyFlags[p.controllers.fire] == false)){
+        p.fire();
+        p.canFire = false;
+        setTimeout(() => {p.canFire = true}, delayBetweenFire);
+    }
+    if((e.key == p2.controllers.fire) && (keyFlags[p2.controllers.fire] == false)){
+        p2.fire();
+        p2.canFire = false;
+        setTimeout(() => {p2.canFire = true}, delayBetweenFire);
+    } */
+
+    keyFlags[e.key] = true;
+
+
+
+
+    /*
     if (e.key === 'ArrowRight') {
 
         p.moveRight();
@@ -346,5 +448,15 @@ window.addEventListener('keydown', (e) => {
     if (e.code === 'Space')
         p.fire();
 
+        */
 
 })
+
+
+
+window.addEventListener('keyup', (e)=> {
+    keyFlags[e.key] = false;
+});
+
+
+
