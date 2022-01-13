@@ -122,6 +122,7 @@
   #sound, #music, #ok, #mute{
     width: 75px;
     height: 75px;
+    cursor: pointer;
   }
 
   #sound{
