@@ -6,6 +6,8 @@ const difficulty = document.getElementById('difficulty');
 const settings = document.getElementById('settings');
 const info = document.getElementById('how-to-play');
 const pause = document.getElementById('pause-div');
+const so_img = document.getElementById('sound');
+const mu_img = document.getElementById('music');
 const music = new Audio('m.mp3');
 const b = new Audio('b.wav');
 const c = new Audio('c.wav');
@@ -72,6 +74,7 @@ function removeDiv(level) {
     difficulty.style.display = 'none';
     play = true;
     playBird();
+    playMusic()
     ID = level.id;
     if (ID == 1) {
         level = 1;
@@ -92,21 +95,27 @@ document.getElementById('menu-img').addEventListener('click', () => {
     }
 });
 
+
 document.getElementById('sound').addEventListener('click', () => {
     if (b.muted) {
         b.muted = false;
         c.muted = false;
+        document.getElementById("sound").src = "images/Sound_BTN_active.png";
+        
     } else {
         b.muted = true;
         c.muted = true
+        document.getElementById("sound").src = "images/Sound_BTN.png";
     }
 });
 
 document.getElementById('music').addEventListener('click', () => {
     if (music.muted) {
         music.muted = false;
+        document.getElementById("music").src = "images/Music_BTN_active.png";
     } else {
         music.muted = true;
+        document.getElementById("music").src = "images/Music_BTN.png";
     }
 });
 
