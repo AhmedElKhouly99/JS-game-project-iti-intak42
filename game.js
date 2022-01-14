@@ -8,7 +8,6 @@ const info = document.getElementById('how-to-play');
 const pause = document.getElementById('pause-div');
 const mode = document.getElementById('mode');
 const single = document.getElementById('single');
-// const multi = document.getElementById("multi");
 const multi =  document.getElementById("multi");
 const gameover = document.getElementById('gameover');
 const winTie = document.getElementById('win-tie');
@@ -166,6 +165,9 @@ document.getElementById('music').addEventListener('click', () => {
 function displayWinnerTie(name, score, isTie) {
     
     container.style.display = 'block';
+    setting_menu = false;
+    container.style.display = 'block';
+    pause.style.display = 'none';
     displayTemplate(winTie);
     if (isTie) {
         winTie.children[1].textContent = 'Draw';
@@ -177,15 +179,21 @@ function displayWinnerTie(name, score, isTie) {
         winTie.children[4].id = 'score-p';
         winTie.children[4].textContent = name;
     }
-    winTie.children[3].textContent = score;
+    winTie.children[3].textContent = score; 
 }
+
+
 
 function displayRankings(users){
     rankings.innerHTML = '';
-    usernameM.forEach((user)=>{
-        rankings.innerHTML += '<p>'+user.name+'      '+user.score+'</p>';
+    let i = 0;
+    users.forEach((user)=>{
+        rankings.innerHTML += '<p>'+i+'-'+user.name+'      '+user.score+'</p>';
+        i++;
     });
 }
+
+displayRankings([{name:'ahmed',score:5000}, {name:'islam', score:3000}]);
 
 
 
@@ -661,6 +669,20 @@ window.addEventListener('keydown', (e) => {
 
 
     keyFlags[e.key] = true;
+
+    if(e.key == 'Escape'){
+        container.style.display = 'block';
+        b.pause();
+        if (setting_menu) {
+            displayTemplate(pause);
+        }
+        play = false;
+    }
+
+
+
+
+
 
 });
 
