@@ -273,13 +273,18 @@
     position: absolute;
     right: 0;
     left: 0;
-    top:48%;
-    background-color: lightcoral;
+    top:40%;
     width: 23%;
     margin: auto;
+    font-family: initial;
+    list-style-type:none ;
+
   }
-  #game-steps ul li{
+  #game-steps li{
     text-align: initial;
+    font-family:initial;
+    font-size: 21px;
+    color: wheat;
   }
   #how-to-play #menu-img {
     left: 0;
