@@ -151,11 +151,11 @@ class Bird {
         this.alive = true;
         this.crossed = false;
         this.birdImage = new Image();
-        this.birdImage.src = 'raven.png';
-        this.frameWidth = 271;
-        this.frameHight = 194;
+        this.birdImage.src = 'bird.png';
+        this.frameWidth = 473;
+        this.frameHight = 468;
         this.currentFrame = 0;
-        this.frameCount = 6;
+        this.frameCount = 11;
         this.y = this.currentY;
     }
 
@@ -174,8 +174,8 @@ class Bird {
 
 class Player {
     constructor(controllers) {
-        this.width = 110;
-        this.height = 100;
+        this.width = 80;
+        this.height = 120;
         this.currentX = 5;
         this.currentY = (canvasHeight - this.height) / 2;
         this.speedX = 0;
