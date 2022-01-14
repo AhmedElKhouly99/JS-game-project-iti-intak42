@@ -20,7 +20,7 @@
     <img onclick="c.play();removeMenu();displayTemplate(settings);" style="width: 5%; float: right;cursor: pointer;"
       class="menu" id="Settings" src="images/Settings_BTN.png" onmouseleave="this.src='images/Settings_BTN.png'"
       onmouseover="this.src='images/Settings_BTN_on.png'">
-    <img style="width: 20%;padding-top: 130px;width: 30%;" class="menu" id="Exit" src="images/Header.png">
+    <img style="width: 20%;padding-top: 130px;width: 30%;" class="menu" id="Exit" src="images/logo.png">
     <br>
     <img onclick="c.play();removeMenu();displayTemplate(difficulty);music.play();"
       style="width: 20%;cursor: pointer;margin-top: 20px ;" class="menu" id="Play" src="images/Start_BTN.png">
@@ -28,7 +28,7 @@
     <img onclick="c.play();window.close();" style="width: 20%;cursor: pointer;" class="menu" id="Exit"
       src="images/Exit_BTN.png">
 
-    <img onclick="c.play(); displayWinnerTie('Ahmed', 5000, false);" style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;"
+    <img onclick="c.play(); displayTemplate(rankings);" style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;"
       class="menu" id="How_To_Play" src="images/Rating_BTN.png" onmouseleave="this.src='images/Rating_BTN.png'"
       onmouseover="this.src='images/Rating_BTN_on.png'">
     <a onclick="c.play()" href="https://github.com/AhmedElKhouly99/JS-game-project-iti-intak42.git" target="_blank">
@@ -113,7 +113,7 @@
       <img class="background" src="images/Window.png" alt="">
       <p class="" id="header">Player's Nickname</p>
       <form action="" id="loginS">
-        <input type="text" placeholder="Enter your nickname" id="nickname">
+        <input type="text" placeholder="Enter your nickname" id="nickname" required>
         <input onclick="c.play()" id="submitUser" type="submit" value="Play">
       </form>
     </div>
@@ -158,6 +158,32 @@
 
       <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')"
         onclick="c.play();play = false;removeTemplate(gameover);displayMenu()" class="icon" id="menu-img2" src="images\Menu_BTN.png" alt="">
+    </div>
+
+
+    <div id="rankings" class="template" style="display: none;">
+      <img class="background" src="images/Window.png" alt="">
+      <p class="" id="header">Rankings</p>
+      <div>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      <p>ahmed     5000</p>
+      </div>
+      <img onclick="c.play();removeTemplate(rankings);displayMenu();" id="ok" src="images/Ok_BTN.png" alt=""
+        onmouseleave="this.src='images/Ok_BTN.png'" onmouseover="this.src='images/Ok_BTN_on.png'">
+      
     </div>
 
 

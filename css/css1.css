@@ -14,6 +14,7 @@
     background-size: cover;
   }
   .template{
+    /* height: 78%; */
     overflow: hidden;
   }
 
@@ -317,4 +318,27 @@
   #win-tie #score-p{
     animation: blink 2s infinite;
   -webkit-animation: blink 2s infinite;
+  }
+
+  #rankings div{
+    position: fixed;
+    top: 27%;
+    left: 0;
+    right: 0;
+    width: 27%;
+    max-height: 40%;
+    margin: auto;
+    overflow: auto;
+  }
+
+  #rankings p:not(#header){
+    background-color: azure;
+    border-radius: 12px;
+    padding: 2%;
+    margin: 3% 4%;
+  }
+
+  #rankings p:not(#header):hover{
+    box-shadow:0px 0px 15px 5px red;
+   color: red;
   }
