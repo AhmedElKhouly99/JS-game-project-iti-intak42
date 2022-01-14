@@ -21,6 +21,8 @@ const loginM = document.getElementById('loginM');
 const nickname1 = document.getElementById('nickname1');
 const nickname2 = document.getElementById('nickname2');
 
+const submit = document.getElementsByClassName('submit')[0];
+
 const so_img = document.getElementById('sound');
 const mu_img = document.getElementById('music');
 const music = new Audio('m.mp3');
@@ -139,6 +141,7 @@ document.getElementById('music').addEventListener('click', () => {
 });
 
 
+
 /// Single mode
 loginS.addEventListener('submit', (e)=>{
     e.preventDefault();
@@ -165,7 +168,7 @@ loginM.addEventListener('submit', (e)=>{
 ///// Restart
 restart.addEventListener('click', ()=>{
 
-    
+
 });
 
 
