@@ -93,7 +93,7 @@
 
   #easy,
   #medium,
-  #hard {
+  #hard, #single, #multi {
     font-size: x-large;
     position: absolute;
     right: 0;
@@ -105,10 +105,29 @@
     border-radius: 12px;
     padding: 1%;
   }
-#difficulty  p:not(#header):hover{
+#difficulty  p:not(#header):hover, #mode  p:not(#header):hover{
   box-shadow:0px 0px 15px 0px red;
   color: red;
   cursor: pointer;
+}
+
+#multi{
+  top: 50%;
+}
+
+#username #header{
+  font-size: large;
+}
+
+#nickname{
+  margin-top: 20%;
+  padding: 2% 0;
+  border-radius: 15px;
+  border: inset;
+}
+
+#nickname:focus{
+  box-shadow:0px 0px 15px 5px red;
 }
 
   #medium {

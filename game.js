@@ -80,6 +80,7 @@ function removeDiv(level) {
     setTimeout(() => { container.style.display = "none"; }, 700);
     difficulty.style.display = 'none';
     mode.style.display = 'none';
+    username.style.display = 'none';
     play = true;
     playBird();
     playMusic()
