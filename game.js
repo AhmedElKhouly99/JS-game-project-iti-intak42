@@ -9,9 +9,18 @@ const pause = document.getElementById('pause-div');
 const mode = document.getElementById('mode');
 const single = document.getElementById('single');
 const multi =  document.getElementById("multi");
-const username = document.getElementById('username');
-const login = document.getElementById('login');
+
+const restart = document.getElementById('restart-img');
+
+const usernameS = document.getElementById('usernameS');
+const loginS = document.getElementById('loginS');
 const nickname = document.getElementById('nickname');
+
+const usernameM = document.getElementById('usernameM');
+const loginM = document.getElementById('loginM');
+const nickname1 = document.getElementById('nickname1');
+const nickname2 = document.getElementById('nickname2');
+
 const so_img = document.getElementById('sound');
 const mu_img = document.getElementById('music');
 const music = new Audio('m.mp3');
@@ -80,6 +89,8 @@ function removeDiv(level) {
     setTimeout(() => { container.style.display = "none"; }, 700);
     difficulty.style.display = 'none';
     mode.style.display = 'none';
+    usernameM.style.display = 'none';
+    usernameS.style.display = 'none';
     play = true;
     playBird();
     playMusic()
@@ -127,23 +138,34 @@ document.getElementById('music').addEventListener('click', () => {
     }
 });
 
-// single.addEventListener('click', ()=>{
-//     //// Sinle Mode
-// });
 
+/// Single mode
+loginS.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    removeTemplate(usernameS);
+    removeDiv(loginS);
+    nickname.value = '';
 
-multi.addEventListener("click", ()=>{
-///// multiplayer mode
 
 });
 
-/// Single mode
-login.addEventListener('submit', (e)=>{
+
+///// multiplayer mode
+loginM.addEventListener('submit', (e)=>{
     e.preventDefault();
-    removeTemplate(username);
-    removeDiv(login);
+    removeTemplate(usernameM);
+    removeDiv(loginM);
+    nickname1.value = '';
+    nickname2.value = '';
 
 
+});
+
+
+///// Restart
+restart.addEventListener('click', ()=>{
+
+    
 });
 
 

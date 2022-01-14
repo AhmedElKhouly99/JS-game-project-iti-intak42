@@ -14,16 +14,16 @@
 <body>
   <canvas id="canvas" width="1450px" height="664px"></canvas>
   <div id="container">
-      <img onclick="c.play();removeMenu();displayTemplate(info);" style="width: 5%; float: left;cursor: pointer;" class="menu" id="How_To_Play" src="images/Info_BTN.png">
-        <img onclick="c.play();removeMenu();displayTemplate(settings);" style="width: 5%; float: right;cursor: pointer;" class="menu" id="Settings" src="images/Settings_BTN.png">
+      <img onclick="c.play();removeMenu();displayTemplate(info);" style="width: 5%; float: left;cursor: pointer;" class="menu" id="How_To_Play"src="images/Info_BTN.png" onmouseleave="this.src='images/Info_BTN.png'"  onmouseover="this.src='images/Info_BTN_on.png'">
+        <img onclick="c.play();removeMenu();displayTemplate(settings);" style="width: 5%; float: right;cursor: pointer;" class="menu" id="Settings" src="images/Settings_BTN.png" onmouseleave="this.src='images/Settings_BTN.png'"  onmouseover="this.src='images/Settings_BTN_on.png'">
         <img style="width: 20%;padding-top: 130px;width: 30%;" class="menu" id="Exit" src="images/Header.png">
         <br>
         <img onclick="c.play();removeMenu();displayTemplate(difficulty);music.play();" style="width: 20%;cursor: pointer;margin-top: 20px ;" class="menu" id="Play" src="images/Start_BTN.png">
         <br>
         <img onclick="c.play();window.close();" style="width: 20%;cursor: pointer;" class="menu" id="Exit" src="images/Exit_BTN.png">
 
-        <img style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;" class="menu" id="How_To_Play" src="images/Rating_BTN.png">
-       <a href="https://github.com/AhmedElKhouly99/JS-game-project-iti-intak42.git" target="_blank"> <img style="width: 5%; float: right;cursor: pointer;position: absolute;bottom: 0%;right: 0;" class="menu" id="Settings" src="images/More_Games_BTN.png " >
+        <img style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;" class="menu" id="How_To_Play" src="images/Rating_BTN.png" onmouseleave="this.src='images/Rating_BTN.png'"  onmouseover="this.src='images/Rating_BTN_on.png'">
+       <a href="https://github.com/AhmedElKhouly99/JS-game-project-iti-intak42.git" target="_blank"> <img style="width: 5%; float: right;cursor: pointer;position: absolute;bottom: 0%;right: 0;" class="menu" id="Settings" src="images/More_Games_BTN.png " onmouseleave="this.src='images/More_Games_BTN.png'"  onmouseover="this.src='images/More_Games_BTN_on.png'">
 </a>
 
     <div id="difficulty" class="template" style="display: none;">
@@ -41,7 +41,7 @@
       <p id="sound_btn">Sound</p>
       <img onclick="c.play();"  id="music" src="images/Music_BTN_active.png" alt="">
       <p id="music_btn">Music</p>
-      <img onclick="c.play();removeTemplate(settings);displayMenu();" id="ok" src="images/Ok_BTN.png" alt="">
+      <img onclick="c.play();removeTemplate(settings);displayMenu();" id="ok" src="images/Ok_BTN.png" alt="" onmouseleave="this.src='images/Ok_BTN.png'"  onmouseover="this.src='images/Ok_BTN_on.png'">
     </div>
 
     <div id="how-to-play" class="template" style="display: none;" >
@@ -79,17 +79,42 @@
     <div id="mode" class="template" style="display: none;">
       <img class="background"  src="images/Window.png" alt="">
       <p class="" id="header">Game Mode</p>
-      <p onclick="c.play();removeTemplate(mode);displayTemplate(username);" class="" id="single">Single</p>
-      <p onclick="c.play();removeTemplate(mode);removeDiv(this);" class="" id="multi">Multiplayer</p>
+      <p onclick="c.play();removeTemplate(mode);displayTemplate(usernameS);" class="" id="single">Single</p>
+      <p onclick="c.play();removeTemplate(mode);displayTemplate(usernameM);" class="" id="multi">Multiplayer</p>
     </div>
 
-    <div id="username" class="template" style="display: none;">
+    <div id="usernameS" class="template" style="display: none;">
       <img class="background"  src="images/Window.png" alt="">
-      <p class="" id="header">Player's Nickname'</p>
-      <form action="" id="login">
+      <p class="" id="header">Player's Nickname</p>
+      <form action="" id="loginS">
         <input type="text" placeholder="Enter your nickname" id="nickname">
       </form>
     </div>
+
+    <div id="usernameM" class="template" style="display: none;">
+      <img class="background"  src="images/Window.png" alt="">
+      <p class="" id="header">Player's Nickname</p>
+      <form action="" id="loginM">
+        <input type="text" placeholder="Enter your nickname" id="nickname1" required>
+        <input type="text" placeholder="Enter your nickname" id="nickname2" required>
+      </form>
+    </div>
+
+    <div id="gameover" class="template" style="display: none;" >
+      <img class="background" id="pause-background-img"  src="images\PNG\Pause\Window.png" alt="">
+
+      <!-- <img  id="pause-header" src="images\PNG\Pause\Header.png" alt="">  -->
+      <p class="" id="header">Pause</p>
+      <img  id="score-box" src="images\PNG\Pause\Table.png" alt="">
+      <p id="score-content"></p> 
+      <p id="score-p">Your Score</p> 
+
+      <img onmouseover="mouseOver(this,'images/Replay_BTN-active.png')" onmouseout="mouseOut(this,'images/Replay_BTN.png')"  class="icon" id="restart-img" src="images\Replay_BTN.png" alt="">
+      
+      <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')" onclick="c.play();play = false;" class="icon" id="menu-img" src="images\Menu_BTN.png" alt="">
+    </div>
+    
+
 
   </div>
 
