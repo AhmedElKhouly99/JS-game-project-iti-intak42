@@ -508,9 +508,33 @@ function test() {
 
     [...birds, ...bullets].forEach((bird) => { bird.move(); bird.draw(); })//instead of using two lines
 
+
+    checkEndOfGame();
 }
 
 
+
+function checkEndOfGame(){
+    if(!multiplayer){   //Single Player
+        if(!players[0].isAlive()){
+            play = 0;
+            console.log("Game Over");
+            /////////////////////////////////////////////////////////////////////////////
+        }
+    }
+    else{
+        if(!(players[0].isAlive() || players[1].isAlive())){
+            console.log("Both Died");
+            if(players[0].score == players[1].score){   //Tie
+                displayWinnerTie('', 0, true);
+            }else if(players[0].score > players[1].score){  //Player 1 wins
+                displayWinnerTie(players[0].username, players[0].score, false)
+            }else{
+                displayWinnerTie(players[1].username, players[1].score, false)
+            }
+        }
+    }
+}
 
 
 
@@ -565,28 +589,25 @@ function deleteCrossed() {
 
 
     players.forEach((player) => {
+        if(player.isAlive()){
+            birds.forEach((bird) => {
+    
+                if (isPointInRectangle(bird.currentX, bird.currentY, player.currentX, player.currentY, player.width, player.height) ||
+                    isPointInRectangle(bird.currentX + bird.width, bird.currentY, player.currentX, player.currentY, player.width, player.height) ||
+                    isPointInRectangle(bird.currentX, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height) ||
+                    isPointInRectangle(bird.currentX + bird.width, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height)
+                ) {
+                    player.lives--;
+                    bird.crossed = true;
+                }
+                if (bird.currentX < (0 - bird.width)) {
+                    bird.crossed = true;//remove birds that crossed the window
+                    crossedBirds++;
+                    player.lives--;
+                }
+            });
 
-        birds.forEach((bird) => {
-
-            if (isPointInRectangle(bird.currentX, bird.currentY, player.currentX, player.currentY, player.width, player.height) ||
-                isPointInRectangle(bird.currentX + bird.width, bird.currentY, player.currentX, player.currentY, player.width, player.height) ||
-
-                isPointInRectangle(bird.currentX, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height) ||
-
-                isPointInRectangle(bird.currentX + bird.width, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height)
-            ) {
-                console.log("-------------------------")
-                player.lives--;
-                console.log(player.lives);
-                bird.crossed = true;
-            }
-            if (bird.currentX < (0 - bird.width)) {
-                bird.crossed = true;//remove birds that crossed the window
-                crossedBirds++;
-                player.lives--;
-            }
-        });
-
+        }
     });
 }
 
@@ -651,8 +672,8 @@ function drawLives(player, px, py) {
     }
     else {
         //No Lives left
-        play = 0;
-        displayWinnerTie('Ahmed', 20, false); 
+        //play = 0;
+        
         console.log("Player Died");
     }
 }
