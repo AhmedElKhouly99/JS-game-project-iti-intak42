@@ -11,6 +11,7 @@ const single = document.getElementById('single');
 const multi =  document.getElementById("multi");
 const gameover = document.getElementById('gameover');
 const winTie = document.getElementById('win-tie');
+const rankings = document.getElementById('rankings');
 
 const restart = document.getElementById('restart-img');
 
@@ -98,6 +99,7 @@ function removeDiv() {
     info.style.display = 'none';
     gameover.style.display = 'none';
     winTie.style.display = 'none';
+    rankings.style.display = 'none';
     play = true;
     playBird();
     playMusic()
@@ -164,7 +166,7 @@ function displayWinnerTie(name, score, isTie) {
     displayTemplate(winTie);
     if (isTie) {
         winTie.children[1].textContent = 'Draw';
-        winTie.children[1].style.color = 'grey';
+        winTie.children[1].style.color = '#e3f5f4';
         winTie.children[4].textContent = 'Score';
     } else {
         winTie.children[1].textContent = 'Winner';
@@ -173,6 +175,13 @@ function displayWinnerTie(name, score, isTie) {
         winTie.children[4].textContent = name;
     }
     winTie.children[3].textContent = score;
+}
+
+function displayRankings(users){
+    rankings.innerHTML = '';
+    usernameM.forEach((user)=>{
+        rankings.innerHTML += '<p>'+user.name+'      '+user.score+'</p>';
+    });
 }
 
 
