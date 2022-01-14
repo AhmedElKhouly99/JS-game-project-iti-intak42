@@ -144,6 +144,10 @@ loginS.addEventListener('submit', (e)=>{
     e.preventDefault();
     removeTemplate(usernameS);
     removeDiv(loginS);
+
+    multiplayer = false;
+    startNewGame([nickname.value]);
+
     nickname.value = '';
 
 
@@ -164,7 +168,7 @@ loginM.addEventListener('submit', (e)=>{
 
 ///// Restart
 restart.addEventListener('click', ()=>{
-
+    startNewGame(['islam']);
     
 });
 
@@ -260,6 +264,8 @@ class Player {
 
         this.score = 0;
         this.lives = 3;
+
+        this.username = username;
         
     }
 
@@ -361,7 +367,7 @@ class Bullet {
         this.fireImage = new Image();
         this.fireImage.src = 'fire.png';
 
-        this.username = username;
+        
     }
     move() {
         this.currentX += this.speedX;
@@ -522,24 +528,25 @@ window.addEventListener('keyup', (e)=> {
 
 
 
+setInterval(test, 25);      //generate  new frame every 30ms
 
 
-
-function startNewGame(){
+function startNewGame(usernames){
     artArea.clearRect(0, 0, canvasWidth, canvasWidth);
 
     if(multiplayer == false){   //Single Player
-        players = [new Player(1, "islam")];
+        players = [new Player(1, usernames[0])];
     }
     else{
-        players = [new Player(1, "islam"), new Player(2, "Muhammed")];
+        players = [new Player(1, usernames[0]), new Player(2, usernames[1])];
     }
     crossedBirds = 0;
-    setInterval(test, 25);      //generate  new frame every 30ms
+
+    bullets = [];
+    birds = [];
+
+    play = true;
+    console.log("Game Started");
+    console.log(players[0].username);
 }
 
-
-
-multiplayer = true;
-
-startNewGame();
