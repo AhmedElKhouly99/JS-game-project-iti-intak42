@@ -6,6 +6,12 @@ const difficulty = document.getElementById('difficulty');
 const settings = document.getElementById('settings');
 const info = document.getElementById('how-to-play');
 const pause = document.getElementById('pause-div');
+const mode = document.getElementById('mode');
+const single = document.getElementById('single');
+const multi =  document.getElementById("multi");
+const username = document.getElementById('username');
+const login = document.getElementById('login');
+const nickname = document.getElementById('nickname');
 const so_img = document.getElementById('sound');
 const mu_img = document.getElementById('music');
 const music = new Audio('m.mp3');
@@ -14,6 +20,7 @@ const c = new Audio('c.wav');
 music.setAttribute('loop', 'true');
 let level = 1;
 let setting_menu = false;
+
 
 
 function playMusic() {
@@ -72,6 +79,8 @@ function removeDiv(level) {
 
     setTimeout(() => { container.style.display = "none"; }, 700);
     difficulty.style.display = 'none';
+    mode.style.display = 'none';
+    username.style.display = 'none';
     play = true;
     playBird();
     playMusic()
@@ -117,6 +126,26 @@ document.getElementById('music').addEventListener('click', () => {
         music.muted = true;
         document.getElementById("music").src = "images/Music_BTN.png";
     }
+});
+
+// single.addEventListener('click', ()=>{
+//     //// Sinle Mode
+// });
+
+
+multi.addEventListener("click", ()=>{
+///// multiplayer mode
+
+});
+
+/// Single mode
+login.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    removeTemplate(username);
+    removeDiv(login);
+    nickname.value = '';
+
+
 });
 
 
@@ -182,7 +211,7 @@ class Player {
         this.speedX = 0;
         this.speedY = 10;
         this.playerImage = new Image();
-        this.playerImage.src = 'player2.png';
+        this.playerImage.src = 'player1.png';
 
         this.movingLeft = false;
         this.movingRight = false;
@@ -277,6 +306,9 @@ const player2Conrollers = {up:'w', down:'s', right:'d', left : 'a', fire : 'Shif
 
 var p = new Player(player1Conrollers);//creating player from player class
 var p2 = new Player(player2Conrollers);
+p2.playerImage.src = 'player2.png';
+// p2.width = 100;
+// p2.height = 150;
 
 
 class Bullet {
@@ -347,7 +379,9 @@ function detectBirdCollision() {
         birds.forEach((bird) => {
             if (isPointInRectangle(pointX, pointY, bird.currentX, bird.currentY, bird.width, bird.height)) {
                 sCore++;
+                ////////////////////////////////////////////////////////////////////////////////////
                 localStorage.score=sCore;
+                /////////////////////////////////////////////////////////////////////////////////////
                 document.getElementById("score-content").innerText=localStorage.score;
                 bird.alive = false;
                 bullet.hitBird = true;
