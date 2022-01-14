@@ -65,7 +65,7 @@
 
   .template img {
     width: 30%;
-    height: 485px;
+    height: 75%;
     position: absolute;
     right: 0;
     left: 0;
@@ -78,7 +78,7 @@
 
   .template #header, #pause-header {
     position: absolute;
-    top: 12%;
+    top: 15%;
     right: 0;
     left: 0;
     margin: auto;
