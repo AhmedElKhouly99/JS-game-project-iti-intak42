@@ -336,7 +336,6 @@
     border-radius: 12px;
     padding: 2%;
     margin: 3% 4%;
-    width: inherit;
   }
 
   #rankings p:not(#header):hover{
