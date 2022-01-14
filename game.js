@@ -9,6 +9,9 @@ const pause = document.getElementById('pause-div');
 const mode = document.getElementById('mode');
 const single = document.getElementById('single');
 const multi =  document.getElementById("multi");
+const username = document.getElementById('username');
+const login = document.getElementById('login');
+const nickname = document.getElementById('nickname');
 const so_img = document.getElementById('sound');
 const mu_img = document.getElementById('music');
 const music = new Audio('m.mp3');
@@ -18,6 +21,13 @@ music.setAttribute('loop', 'true');
 let level = 1;
 let setting_menu = false;
 
+login.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    removeTemplate(username);
+    removeDiv(login);
+
+
+});
 
 function playMusic() {
     music.play();
@@ -74,6 +84,7 @@ function removeDiv(level) {
     setting_menu = true;
 
     setTimeout(() => { container.style.display = "none"; }, 700);
+    difficulty.style.display = 'none';
     mode.style.display = 'none';
     play = true;
     playBird();
@@ -122,15 +133,15 @@ document.getElementById('music').addEventListener('click', () => {
     }
 });
 
-single.addEventListener('click', ()=>{
-    //// Sinle Mode
-});
+// single.addEventListener('click', ()=>{
+//     //// Sinle Mode
+// });
 
 
-multi.addEventListener("click", ()=>{
-///// multiplayer mode
+// multi.addEventListener("click", ()=>{
+// ///// multiplayer mode
 
-});
+// });
 
 
 //////////////////////////////////////////////////////////////////////
