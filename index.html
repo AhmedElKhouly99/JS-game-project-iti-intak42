@@ -69,7 +69,7 @@
       <p id="score-content"></p> 
       <p id="score-p">Your Score</p> 
 
-      <img onmouseover="mouseOver(this,'images/Replay_BTN-active.png')" onmouseout="mouseOut(this,'images/Replay_BTN.png')"  class="icon" id="restart-img" src="images\Replay_BTN.png" alt="">
+      <img onmouseover="mouseOver(this,'images/Replay_BTN-active.png')" onmouseout="mouseOut(this,'images/Replay_BTN.png')" onclick="c.play();removeTemplate(pause);removeDiv(this)" class="icon" id="restart-img" src="images\Replay_BTN.png" alt="">
       <img onmouseover="mouseOver(this,'images/Settings_BTN-active.png')" onmouseout="mouseOut(this,'images/Settings_BTN.png')" onclick="c.play();removeTemplate(pause);displayTemplate(settings);" class="icon" id="setting-img" src="images\Settings_BTN.png" alt="">
       <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')" onclick="c.play();play = false;" class="icon" id="menu-img" src="images\Menu_BTN.png" alt="">
       <img onmouseover="mouseOver(this,'images/Close_BTN-acive.png')" onmouseout="mouseOut(this,'images/Close_BTN.png')" onclick="c.play();removeTemplate(pause);b.play();play = true;" class="icon" id="close-img" src="images\Close_BTN.png" alt="">

@@ -32,7 +32,7 @@ music.setAttribute('loop', 'true');
 let level = 1;
 let setting_menu = false;
 
-
+var playerNames = [];
 
 function playMusic() {
     music.play();
@@ -149,7 +149,8 @@ loginS.addEventListener('submit', (e)=>{
     removeDiv(loginS);
 
     multiplayer = false;
-    startNewGame([nickname.value]);
+    playerNames = [nickname.value];
+    startNewGame();
 
     nickname.value = '';
 
@@ -162,6 +163,11 @@ loginM.addEventListener('submit', (e)=>{
     e.preventDefault();
     removeTemplate(usernameM);
     removeDiv(loginM);
+
+    multiplayer = true;
+    playerNames = [nickname1.value, nickname2.value];
+    startNewGame();
+
     nickname1.value = '';
     nickname2.value = '';
 
@@ -174,6 +180,8 @@ restart.addEventListener('click', ()=>{
 
 
     startNewGame(['islam']);
+    console.log("Restarting Game");
+    startNewGame();
     
 });
 
@@ -536,14 +544,14 @@ window.addEventListener('keyup', (e)=> {
 setInterval(test, 25);      //generate  new frame every 30ms
 
 
-function startNewGame(usernames){
+function startNewGame(){
     artArea.clearRect(0, 0, canvasWidth, canvasWidth);
 
     if(multiplayer == false){   //Single Player
-        players = [new Player(1, usernames[0])];
+        players = [new Player(1, playerNames[0])];
     }
     else{
-        players = [new Player(1, usernames[0]), new Player(2, usernames[1])];
+        players = [new Player(1, playerNames[0]), new Player(2, playerNames[1])];
     }
     crossedBirds = 0;
 
