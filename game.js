@@ -147,6 +147,10 @@ loginS.addEventListener('submit', (e)=>{
     e.preventDefault();
     removeTemplate(usernameS);
     removeDiv(loginS);
+
+    multiplayer = false;
+    startNewGame([nickname.value]);
+
     nickname.value = '';
 
 
@@ -167,8 +171,13 @@ loginM.addEventListener('submit', (e)=>{
 
 ///// Restart
 restart.addEventListener('click', ()=>{
+<<<<<<< HEAD
 
 
+=======
+    startNewGame(['islam']);
+    
+>>>>>>> 9bef18f265afce8f29a816a0573d565d370eb32a
 });
 
 
@@ -187,8 +196,11 @@ let sCore = 0;
 var birds = [];
 var bullets = [];
 
+var multiplayer = false;
+var players;
 
-var keyFlags = {'w' : false, 's' : false, 'a' : false, 'd' : false, ' ' : false, 'Shift' : false, 'ArrowUp' : false, 'ArrowDown' : false, 'ArrowLeft' : false, 'ArrowRight' : false};
+
+var keyFlags = {'w' : false, 's' : false, 'a' : false, 'd' : false, ' ' : false, 'f' : false, 'ArrowUp' : false, 'ArrowDown' : false, 'ArrowLeft' : false, 'ArrowRight' : false};
 
 const delayBetweenFire = 200;
 
@@ -225,16 +237,31 @@ class Bird {
 }
 
 
+const player1Conrollers = {up:'ArrowUp', down:'ArrowDown', right:'ArrowRight', left : 'ArrowLeft', fire : ' '};
+const player2Conrollers = {up:'w', down:'s', right:'d', left : 'a', fire : 'f'};
+
 class Player {
-    constructor(controllers) {
+    constructor(playerStyle, username) {
         this.width = 80;
         this.height = 120;
         this.currentX = 5;
         this.currentY = (canvasHeight - this.height) / 2;
         this.speedX = 0;
         this.speedY = 10;
+
         this.playerImage = new Image();
-        this.playerImage.src = 'player1.png';
+        
+
+        if(playerStyle == 1){
+            this.playerImage.src = 'player1.png';
+            this.controllers = player1Conrollers;
+        }
+        else{
+            this.playerImage.src = 'player2.png';
+            this.controllers = player2Conrollers;
+        }
+
+        
 
         this.movingLeft = false;
         this.movingRight = false;
@@ -242,7 +269,20 @@ class Player {
         this.movingDown = false;
         this.firing = false;
         this.canFire = true;
-        this.controllers = controllers;
+
+        this.score = 0;
+        this.lives = 3;
+
+        this.username = username;
+        
+    }
+
+    getScore(){
+        return this.score;
+    }
+
+    incrementScore(){
+        this.score++;
     }
 
     updateControllersStates(){
@@ -257,14 +297,6 @@ class Player {
     updateState(){
         this.updateControllersStates();
         //Move if moving and fire if firing
-        
-        console.log(keyFlags);
-        console.log("Right: " + this.movingRight);
-        console.log("Left: " + this.movingLeft);
-        console.log("Up: " + this.movingUp);
-        console.log("down: " + this.movingDown);
-        
-
 
         if(this.movingUp){
             this.moveUp();
@@ -322,30 +354,28 @@ class Player {
 }
 
 
-const player1Conrollers = {up:'ArrowUp', down:'ArrowDown', right:'ArrowRight', left : 'ArrowLeft', fire : ' '};
-const player2Conrollers = {up:'w', down:'s', right:'d', left : 'a', fire : 'Shift'};
 
 
 
-var p = new Player(player1Conrollers);//creating player from player class
-var p2 = new Player(player2Conrollers);
-p2.playerImage.src = 'player2.png';
-// p2.width = 100;
-// p2.height = 150;
+
+
 
 
 class Bullet {
     constructor(player) {
-        this.width = 50;
-        this.height = 40;
-        this.currentX = player.currentX + Math.floor(player.width / 2.6)+50;
+        this.ownerPlayer = player;
+        this.width = 42;
+        this.height = 16;
         this.speedX = 10;
         this.speedY = 0;
-        this.currentY = player.currentY +this.height-8;
+        this.currentX = player.currentX + player.width - this.speedX;
+        this.currentY = player.currentY + (player.height / 2) - (this.height / 2);
         this.hitBird = false;
         this.crossedHiegt = false;
         this.fireImage = new Image();
         this.fireImage.src = 'fire.png';
+
+        
     }
     move() {
         this.currentX += this.speedX;
@@ -363,7 +393,7 @@ class Bullet {
 
 
 
-setInterval(test, 25);//generate  new frame every 30ms
+
 
 
 function test() {
@@ -374,14 +404,15 @@ function test() {
     detectBirdCollision();
     filtering();
     updateScore();
-    p.updateState();
-    p.draw();
 
-    p2.updateState();
-    p2.draw();
+    players.forEach((player) => {
+        player.updateState();
+        player.draw();
+    });
+
+    
 
     [...birds, ...bullets].forEach((bird) => { bird.move(); bird.draw(); })//instead of using two lines
-
 
 }
 
@@ -401,11 +432,11 @@ function detectBirdCollision() {
         pointY = bullet.currentY;
         birds.forEach((bird) => {
             if (isPointInRectangle(pointX, pointY, bird.currentX, bird.currentY, bird.width, bird.height)) {
-                sCore++;
+                bullet.ownerPlayer.incrementScore();
                 ////////////////////////////////////////////////////////////////////////////////////
-                localStorage.score=sCore;
+                //localStorage.score=sCore;
                 /////////////////////////////////////////////////////////////////////////////////////
-                document.getElementById("score-content").innerText=localStorage.score;
+                //document.getElementById("score-content").innerText=localStorage.score;
                 bird.alive = false;
                 bullet.hitBird = true;
             }
@@ -487,18 +518,8 @@ window.addEventListener('keydown', (e) => {
     console.log(e.key);
 
 
-/*     if((e.key == p.controllers.fire) && (keyFlags[p.controllers.fire] == false)){
-        p.fire();
-        p.canFire = false;
-        setTimeout(() => {p.canFire = true}, delayBetweenFire);
-    }
-    if((e.key == p2.controllers.fire) && (keyFlags[p2.controllers.fire] == false)){
-        p2.fire();
-        p2.canFire = false;
-        setTimeout(() => {p2.canFire = true}, delayBetweenFire);
-    } */
-
     keyFlags[e.key] = true;
+
 
 
 
@@ -513,4 +534,27 @@ window.addEventListener('keyup', (e)=> {
 });
 
 
+
+
+setInterval(test, 25);      //generate  new frame every 30ms
+
+
+function startNewGame(usernames){
+    artArea.clearRect(0, 0, canvasWidth, canvasWidth);
+
+    if(multiplayer == false){   //Single Player
+        players = [new Player(1, usernames[0])];
+    }
+    else{
+        players = [new Player(1, usernames[0]), new Player(2, usernames[1])];
+    }
+    crossedBirds = 0;
+
+    bullets = [];
+    birds = [];
+
+    play = true;
+    console.log("Game Started");
+    console.log(players[0].username);
+}
 
