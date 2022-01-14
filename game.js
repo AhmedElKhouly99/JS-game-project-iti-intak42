@@ -9,6 +9,9 @@ const pause = document.getElementById('pause-div');
 const mode = document.getElementById('mode');
 const single = document.getElementById('single');
 const multi = document.getElementById("multi");
+const multi =  document.getElementById("multi");
+const gameover = document.getElementById('gameover');
+const winTie = document.getElementById('win-tie');
 
 const restart = document.getElementById('restart-img');
 
@@ -21,7 +24,6 @@ const loginM = document.getElementById('loginM');
 const nickname1 = document.getElementById('nickname1');
 const nickname2 = document.getElementById('nickname2');
 
-const submit = document.getElementsByClassName('submit')[0];
 
 const so_img = document.getElementById('sound');
 const mu_img = document.getElementById('music');
@@ -85,34 +87,52 @@ function removeTemplate(p) {
 
 }
 
-function removeDiv(level) {
+function removeDiv() {
     setting_menu = true;
 
     setTimeout(() => { container.style.display = "none"; }, 700);
     difficulty.style.display = 'none';
     mode.style.display = 'none';
+    settings.style.display = 'none';
     usernameM.style.display = 'none';
     usernameS.style.display = 'none';
+    info.style.display = 'none';
+    gameover.style.display = 'none';
+    winTie.style.display = 'none';
     play = true;
     playBird();
     playMusic()
-    ID = level.id;
-    if (ID == 1) {
-        level = 1;
-    } else if (ID == 2) {
-        level = 2;
-    } else {
-        level = 3;
-    }
-
+    
 }
-
+////// menu btn
 document.getElementById('menu-img').addEventListener('click', () => {
     if (confirm("Are You Sure !?")) {
         setting_menu = false;
         console.log(setting_menu);
         removeTemplate(pause);
         displayMenu();
+        artArea.clearRect(0, 0, canvas.width, canvas.height);
+    }
+});
+
+document.getElementById('menu-img1').addEventListener('click', () => {
+    if (confirm("Are You Sure !?")) {
+        setting_menu = false;
+        console.log(setting_menu);
+        removeTemplate(gameover);
+        displayMenu();
+        artArea.clearRect(0, 0, canvas.width, canvas.height);
+    }
+});
+
+document.getElementById('menu-img2').addEventListener('click', () => {
+    if (confirm("Are You Sure !?")) {
+        setting_menu = false;
+        console.log(setting_menu);
+        winTie.children[4].id = ''
+        removeTemplate(winTie);
+        displayMenu();
+        artArea.clearRect(0, 0, canvas.width, canvas.height);
     }
 });
 
@@ -141,10 +161,27 @@ document.getElementById('music').addEventListener('click', () => {
 });
 
 
+function displayWinnerTie(name, score, isTie) {
+    displayTemplate(winTie);
+    if (isTie) {
+        winTie.children[1].textContent = 'Draw';
+        winTie.children[1].style.color = 'grey';
+        winTie.children[4].textContent = 'Score';
+    } else {
+        winTie.children[1].textContent = 'Winner';
+        winTie.children[1].style.color = '#6eff6e';
+        winTie.children[4].id = 'score-p';
+        winTie.children[4].textContent = name;
+    }
+    winTie.children[3].textContent = score;
+}
+
+
 
 /// Single mode
 loginS.addEventListener('submit', (e) => {
     e.preventDefault();
+    c.play();
     removeTemplate(usernameS);
     removeDiv(loginS);
 
@@ -177,8 +214,32 @@ loginM.addEventListener('submit', (e) => {
 
 ///// Restart
 restart.addEventListener('click', () => {
+///// Restart btn
+restart.addEventListener('click', ()=>{
 
+    removeTemplate(pause);
+    removeDiv(this);
+    startNewGame(['islam']);
+    console.log("Restarting Game");
+    startNewGame();
+    
+});
 
+document.getElementById('restart-img1').addEventListener('click', ()=>{
+
+    removeTemplate(gameover);
+    removeDiv(this);
+    startNewGame(['islam']);
+    console.log("Restarting Game");
+    startNewGame();
+    
+});
+
+document.getElementById('restart-img2').addEventListener('click', ()=>{
+
+    removeTemplate(winTie);
+    winTie.children[4].id = '';
+    removeDiv(this);
     startNewGame(['islam']);
     console.log("Restarting Game");
     startNewGame();
@@ -579,7 +640,7 @@ window.addEventListener('keydown', (e) => {
 
 
 
-})
+});
 
 
 

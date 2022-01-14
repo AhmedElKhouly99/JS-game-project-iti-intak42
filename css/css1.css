@@ -24,7 +24,6 @@
     width: 90%;
     height: 90%;
     max-height: 664px;
-    background-color: blue;
     position: fixed;
     left: 0;
     right: 0;
@@ -39,7 +38,6 @@
   #container {
     width: 90%;
     height: 90%;
-    /* background-color: yellow; */
     position: absolute;
     z-index: 99;
     left: 0;
@@ -73,7 +71,6 @@
     margin: auto;
     font-size: xx-large;
     color: #e3f5f4;
-    /* color: #e84545; */
   }
 
   #Play, #Exit{
@@ -115,8 +112,32 @@
   border: inset;
 }
 
+#nickname1, #nickname2, #submitUser{
+  display: block;
+  margin: auto;
+}
+#nickname1{
+  margin-top: 13%;
+}
+#nickname2{
+  margin-top: 3%;
+}
+#submitUser{
+  margin-top: 2%;
+  background-color: #e3f5f4;;
+  padding: 2%;
+  border-radius: 12px;
+  color: black;
+}
+
+#submitUser:hover{
+  box-shadow:0px 0px 15px 5px red;
+  color: red;
+}
+
 #nickname:focus, #nickname1:focus, #nickname2:focus{
   box-shadow:0px 0px 15px 5px red;
+  color: red;
 }
 
   #medium {
@@ -153,9 +174,7 @@
     position: absolute;
     top: 0;
   }
-  /* #settings{
-    position:fixed;
-  } */
+
   #settings p{
     left: 48%;
     font-size: x-large;
@@ -176,14 +195,6 @@
     top: 350px;
   }
 
-  /* #pause-header {
-    position: absolute;
-    top: 106px;
-    right: 0;
-    left: 0;
-    margin: auto;
-    width:13%;
-  } */
   #score-box {
     position: absolute;
     top: 0%;
@@ -233,7 +244,7 @@
  
   }
   
-  #restart-img, #setting-img, #menu-img, #close-img{
+  #restart-img, #setting-img, #menu-img, #close-img, #menu-img1, #menu-img2, #restart-img1, #restart-img2{
     width: 75px;
     height: 75px;
     position: absolute;
@@ -248,7 +259,7 @@
   #setting-img {
     left: 43.5%;
   }
-  #menu-img {
+  #menu-img, #menu-img1, #menu-img2{
     
     left: 50.5%;
     
@@ -273,16 +284,37 @@
     position: absolute;
     right: 0;
     left: 0;
-    top:48%;
-    background-color: lightcoral;
+    top:40%;
     width: 23%;
     margin: auto;
+    font-family: initial;
+    list-style-type:none ;
+
   }
-  #game-steps ul li{
+  #game-steps li{
     text-align: initial;
+    font-size: 12px;
+    color: wheat;
   }
-  #how-to-play #menu-img {
+  #how-to-play #menu-img{
     left: 0;
     right: 0;
     margin: auto;
+  }
+
+  #gameover #header{
+    color: red;
+  }
+
+  #win-tie #header{
+    color: #6eff6e;
+  }
+
+ #restart-img1, #restart-img2{
+    margin: auto 43%;
+  }
+
+  #win-tie #score-p{
+    animation: blink 2s infinite;
+  -webkit-animation: blink 2s infinite;
   }
