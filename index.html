@@ -47,16 +47,22 @@
     <div id="how-to-play" class="template" style="display: none;" >
       <img class="background" id="how-to-play-img"  src="images\PNG\Hangar\Table_01.png" alt="">
       <div id="game-img"></div>
-      <div id="game-steps">
-        <ul>
-          <li>Coffee</li>
-          <li>Tea</li>
-          <li>Milk</li>
-          <li>Coffee</li>
-          <li>Tea</li>
-          <li>Milk</li>
+        <ul id="game-steps">
+          <li style="color: #e3f5f4; font-size: 24px;">Single Player
+           <ul>
+             <li>For moving use up and down arrows</li>
+             <li>for shooting use space bar</li>
+            </ul>
+          </li>
+          <li style="color: #e3f5f4; font-size: 24px;">Second Player
+            <ul>
+              <li>For moving use S and W keys</li>
+              <li>for shooting use Shift key</li>
+            </ul>
+          </li>
+          
         </ul>
-      </div>
+      
       <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')" onclick="c.play();removeTemplate(info);displayMenu();" class="" id="how-menu-btn" src="images\PNG\Rating\Menu_BTN.png" alt="">
     </div>
 
