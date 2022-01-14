@@ -9,6 +9,9 @@ const pause = document.getElementById('pause-div');
 const mode = document.getElementById('mode');
 const single = document.getElementById('single');
 const multi =  document.getElementById("multi");
+
+const restart = document.getElementById('restart-img');
+
 const usernameS = document.getElementById('usernameS');
 const loginS = document.getElementById('loginS');
 const nickname = document.getElementById('nickname');
@@ -156,6 +159,13 @@ loginM.addEventListener('submit', (e)=>{
     nickname2.value = '';
 
 
+});
+
+
+///// Restart
+restart.addEventListener('click', ()=>{
+
+    
 });
 
 
