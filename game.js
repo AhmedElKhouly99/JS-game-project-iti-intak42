@@ -131,9 +131,10 @@ const canvasHeight = canvas.height;
 
 var crossedBirds = 0;
 var play = false;
-let score = 0;
+let sCore = 0;
 var birds = [];
 var bullets = [];
+
 
 var keyFlags = {'w' : false, 's' : false, 'a' : false, 'd' : false, ' ' : false, 'Shift' : false, 'ArrowUp' : false, 'ArrowDown' : false, 'ArrowLeft' : false, 'ArrowRight' : false};
 
@@ -282,10 +283,10 @@ class Bullet {
     constructor(player) {
         this.width = 50;
         this.height = 40;
-        this.currentX = player.currentX + Math.floor(player.width / 2);
+        this.currentX = player.currentX + Math.floor(player.width / 2.6)+50;
         this.speedX = 10;
         this.speedY = 0;
-        this.currentY = player.currentY +this.height;
+        this.currentY = player.currentY +this.height-8;
         this.hitBird = false;
         this.crossedHiegt = false;
         this.fireImage = new Image();
@@ -345,7 +346,9 @@ function detectBirdCollision() {
         pointY = bullet.currentY;
         birds.forEach((bird) => {
             if (isPointInRectangle(pointX, pointY, bird.currentX, bird.currentY, bird.width, bird.height)) {
-                score++;
+                sCore++;
+                localStorage.score=sCore;
+                document.getElementById("score-content").innerText=localStorage.score;
                 bird.alive = false;
                 bullet.hitBird = true;
             }
@@ -412,7 +415,7 @@ window.addEventListener('blur', () => {
 function updateScore() {
     artArea.fillStyle = "#c2d2d4";
     artArea.font = "30px myfont";
-    artArea.fillText('score:' + score, 50, 50);
+    artArea.fillText('score:' + sCore, 50, 50);
 }
 
 
