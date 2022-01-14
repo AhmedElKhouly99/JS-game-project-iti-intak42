@@ -29,9 +29,9 @@
     <div id="difficulty" class="template" style="display: none;">
       <img class="background"  src="images/Window.png" alt="">
       <p class="" id="header">Difficulty</p>
-      <p onclick="c.play();removeTemplate(difficulty);removeDiv(this);" class="" id="easy">Easy</p>
-      <p onclick="c.play();removeTemplate(difficulty);removeDiv(this);" class="" id="medium">Medium</p>
-      <p onclick="c.play();removeTemplate(difficulty);removeDiv(this);" class="" id="hard">Hard</p>
+      <p onclick="c.play();removeTemplate(difficulty);displayTemplate(mode)" class="" id="easy">Easy</p>
+      <p onclick="c.play();removeTemplate(difficulty);removeDiv(mode);" class="" id="medium">Medium</p>
+      <p onclick="c.play();removeTemplate(difficulty);removeDiv(mode);" class="" id="hard">Hard</p>
     </div>
 
     <div id="settings" class="template" style="display: none;">
@@ -73,6 +73,14 @@
       <img onmouseover="mouseOver(this,'images/Settings_BTN-active.png')" onmouseout="mouseOut(this,'images/Settings_BTN.png')" onclick="c.play();removeTemplate(pause);displayTemplate(settings);" class="icon" id="setting-img" src="images\Settings_BTN.png" alt="">
       <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')" onclick="c.play();play = false;" class="icon" id="menu-img" src="images\Menu_BTN.png" alt="">
       <img onmouseover="mouseOver(this,'images/Close_BTN-acive.png')" onmouseout="mouseOut(this,'images/Close_BTN.png')" onclick="c.play();removeTemplate(pause);b.play();play = true;" class="icon" id="close-img" src="images\Close_BTN.png" alt="">
+    </div>
+
+
+    <div id="mode" class="template" style="display: none;">
+      <img class="background"  src="images/Window.png" alt="">
+      <p class="" id="header">Game Mode</p>
+      <p onclick="c.play();removeTemplate(mode);removeDiv(this);" class="" id="single">Single</p>
+      <p onclick="c.play();removeTemplate(mode);removeDiv(this);" class="" id="multi">Multiplayer</p>
     </div>
 
   </div>
