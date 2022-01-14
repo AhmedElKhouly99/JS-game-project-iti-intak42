@@ -163,6 +163,8 @@ document.getElementById('music').addEventListener('click', () => {
 
 
 function displayWinnerTie(name, score, isTie) {
+    
+    container.style.display = 'block';
     setting_menu = false;
     container.style.display = 'block';
     pause.style.display = 'none';
@@ -367,6 +369,16 @@ class Player {
 
     }
 
+    isAlive(){
+        return this.lives >= 1;
+    }
+
+    incrementLives(){
+        this.lives++;
+        if(this.lives > 3)
+            this.lives = 3;
+    }
+
     getScore() {
         return this.score;
     }
@@ -402,7 +414,7 @@ class Player {
             this.moveLeft();
         }
         if (this.firing) {
-            if (this.canFire) {
+            if (this.canFire && this.isAlive()) {
                 this.fire();
                 this.canFire = false;
                 setTimeout(() => { this.canFire = true }, delayBetweenFire);
@@ -435,9 +447,9 @@ class Player {
     }
 
     draw() {
-
-        artArea.drawImage(this.playerImage, this.currentX, this.currentY, this.width, this.height);
-
+        if(this.isAlive()){
+            artArea.drawImage(this.playerImage, this.currentX, this.currentY, this.width, this.height);
+        }
     }
 
 
@@ -461,7 +473,7 @@ class Bullet {
         this.currentX = player.currentX + player.width - this.speedX;
         this.currentY = player.currentY + (player.height / 2) - (this.height / 2);
         this.hitBird = false;
-        this.crossedHiegt = false;
+        this.crossed = false;
         this.fireImage = new Image();
         this.fireImage.src = 'fire.png';
 
@@ -542,7 +554,7 @@ function detectBirdCollision() {
 //removing killed bird and the fire 
 function filtering() {
     birds = birds.filter(bird => (bird.alive && (!bird.crossed)));
-    bullets = bullets.filter(bullet => (!(bullet.hitBird) && (!bullet.crossedHiegt)))
+    bullets = bullets.filter(bullet => (!(bullet.hitBird) && (!bullet.crossed)))
 }
 
 //creating new bird after 400ms
@@ -553,6 +565,11 @@ setInterval(() => {
 
 
 function deleteCrossed() {
+
+    bullets.forEach((bullet) => {
+        if(bullet.currentX  - bullet.width > canvasWidth ||bullet.currentX < 0 || bullet.currentY + bullet.height < 0 || bullet.currentY > canvasHeight)
+            bullet.crossed = true;
+    })
 
 
     players.forEach((player) => {
@@ -612,10 +629,9 @@ function updateScore(multiplayer, Player) {
     let player1 = Player[0];
     let player2 = Player[1];
     if (!multiplayer) {
-        let x = 50;
-        let y = 50;
+        
 
-        artArea.fillText(player1.username + " 's score : " + player1.score, x, y);
+        artArea.fillText(player1.username + " 's score : " + player1.score, 50, 50);
         drawLives(player1,canvasWidth-80,40);
     }
     else {
@@ -642,7 +658,10 @@ function drawLives(player, px, py) {
         artArea.drawImage(lifes,px,py,50,50);
     }
     else {
+        //No Lives left
         play = 0;
+        displayWinnerTie('Ahmed', 20, false); 
+        console.log("Player Died");
     }
 }
 
