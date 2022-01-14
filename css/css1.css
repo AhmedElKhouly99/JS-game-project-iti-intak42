@@ -78,7 +78,7 @@
 
   .template #header, #pause-header {
     position: absolute;
-    top: 100px;
+    top: 12%;
     right: 0;
     left: 0;
     margin: auto;
@@ -178,7 +178,7 @@
   } */
   #score-box {
     position: absolute;
-    top: -85px;
+    top: 0%;
     right: 0;
     left: 0;
     margin: auto;
@@ -188,7 +188,7 @@
 
   #score-content{
     position: absolute;
-    top: 263px;
+    top: 46%;
     right: 0;
     left: 0;
     margin: auto;
@@ -200,11 +200,11 @@
 
   #score-p{
     position: absolute;
-    top: 343px;
+    top: 28%;
     right: 0;
     left: 0;
     margin: auto;
-    width: 21%;
+    width: 26%;
     font-size: xx-large;
     font-family: myfont;
     color: white;
