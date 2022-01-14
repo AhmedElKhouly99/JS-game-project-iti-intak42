@@ -85,7 +85,7 @@ function removeTemplate(p) {
 
 }
 
-function removeDiv(level) {
+function removeDiv() {
     setting_menu = true;
 
     setTimeout(() => { container.style.display = "none"; }, 700);
@@ -94,18 +94,11 @@ function removeDiv(level) {
     settings.style.display = 'none';
     usernameM.style.display = 'none';
     usernameS.style.display = 'none';
+    info.style.display = 'none'
     play = true;
     playBird();
     playMusic()
-    ID = level.id;
-    if (ID == 1) {
-        level = 1;
-    } else if (ID == 2) {
-        level = 2;
-    } else {
-        level = 3;
-    }
-
+    
 }
 
 document.getElementById('menu-img').addEventListener('click', () => {
@@ -114,6 +107,7 @@ document.getElementById('menu-img').addEventListener('click', () => {
         console.log(setting_menu);
         removeTemplate(pause);
         displayMenu();
+        artArea.clearRect(0, 0, canvas.width, canvas.height);
     }
 });
 

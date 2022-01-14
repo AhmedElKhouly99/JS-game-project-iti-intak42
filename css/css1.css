@@ -24,7 +24,6 @@
     width: 90%;
     height: 90%;
     max-height: 664px;
-    background-color: blue;
     position: fixed;
     left: 0;
     right: 0;
@@ -39,7 +38,6 @@
   #container {
     width: 90%;
     height: 90%;
-    /* background-color: yellow; */
     position: absolute;
     z-index: 99;
     left: 0;
@@ -73,7 +71,6 @@
     margin: auto;
     font-size: xx-large;
     color: #e3f5f4;
-    /* color: #e84545; */
   }
 
   #Play, #Exit{
@@ -177,9 +174,7 @@
     position: absolute;
     top: 0;
   }
-  /* #settings{
-    position:fixed;
-  } */
+
   #settings p{
     left: 48%;
     font-size: x-large;
@@ -200,14 +195,6 @@
     top: 350px;
   }
 
-  /* #pause-header {
-    position: absolute;
-    top: 106px;
-    right: 0;
-    left: 0;
-    margin: auto;
-    width:13%;
-  } */
   #score-box {
     position: absolute;
     top: 0%;
