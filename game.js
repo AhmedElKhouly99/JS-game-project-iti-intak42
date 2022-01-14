@@ -185,15 +185,23 @@ function displayWinnerTie(name, score, isTie) {
 
 
 function displayRankings(users){
-    rankings.innerHTML = '';
+    rankings.children[2].innerHTML = '';
     let i = 0;
     users.forEach((user)=>{
-        rankings.innerHTML += '<p>'+i+'-'+user.name+'      '+user.score+'</p>';
+        rankings.children[2].innerHTML += `<p>${i+1}-${user.name}          ${user.score}</p>`;
         i++;
     });
 }
 
 displayRankings([{name:'ahmed',score:5000}, {name:'islam', score:3000}]);
+
+function gameOver(score){
+    gameover.children[3] = score;
+    setting_menu = false;
+    container.style.display = 'block';
+    pause.style.display = 'none';
+    displayTemplate(gameover);
+}
 
 
 
