@@ -21,13 +21,7 @@ music.setAttribute('loop', 'true');
 let level = 1;
 let setting_menu = false;
 
-login.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    removeTemplate(username);
-    removeDiv(login);
 
-
-});
 
 function playMusic() {
     music.play();
@@ -138,10 +132,19 @@ document.getElementById('music').addEventListener('click', () => {
 // });
 
 
-// multi.addEventListener("click", ()=>{
-// ///// multiplayer mode
+multi.addEventListener("click", ()=>{
+///// multiplayer mode
 
-// });
+});
+
+/// Single mode
+login.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    removeTemplate(username);
+    removeDiv(login);
+
+
+});
 
 
 //////////////////////////////////////////////////////////////////////
