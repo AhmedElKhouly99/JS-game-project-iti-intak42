@@ -8,7 +8,7 @@ const info = document.getElementById('how-to-play');
 const pause = document.getElementById('pause-div');
 const mode = document.getElementById('mode');
 const single = document.getElementById('single');
-const multi = document.getElementById("multi");
+// const multi = document.getElementById("multi");
 const multi =  document.getElementById("multi");
 const gameover = document.getElementById('gameover');
 const winTie = document.getElementById('win-tie');
@@ -221,8 +221,7 @@ loginM.addEventListener('submit', (e) => {
 });
 
 
-///// Restart
-restart.addEventListener('click', () => {
+
 ///// Restart btn
 restart.addEventListener('click', ()=>{
 
