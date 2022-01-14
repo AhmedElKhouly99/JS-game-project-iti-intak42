@@ -196,7 +196,7 @@ function displayRankings(users){
 displayRankings([{name:'ahmed',score:5000}, {name:'islam', score:3000}]);
 
 function gameOver(score){
-    gameover.children[3] = score;
+    gameover.children[3].innerHTML = score;
     setting_menu = false;
     container.style.display = 'block';
     pause.style.display = 'none';
