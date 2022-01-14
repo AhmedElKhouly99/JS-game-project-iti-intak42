@@ -22,8 +22,8 @@
         <br>
         <img onclick="c.play();window.close();" style="width: 20%;cursor: pointer;" class="menu" id="Exit" src="images/Exit_BTN.png">
 
-        <img style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;" class="menu" id="How_To_Play" src="images/Rating_BTN.png" onmouseleave="this.src='images/Rating_BTN.png'"  onmouseover="this.src='images/Rating_BTN_on.png'">
-       <a href="https://github.com/AhmedElKhouly99/JS-game-project-iti-intak42.git" target="_blank"> <img style="width: 5%; float: right;cursor: pointer;position: absolute;bottom: 0%;right: 0;" class="menu" id="Settings" src="images/More_Games_BTN.png " onmouseleave="this.src='images/More_Games_BTN.png'"  onmouseover="this.src='images/More_Games_BTN_on.png'">
+        <img onclick="c.play()" style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;" class="menu" id="How_To_Play" src="images/Rating_BTN.png" onmouseleave="this.src='images/Rating_BTN.png'"  onmouseover="this.src='images/Rating_BTN_on.png'">
+       <a onclick="c.play()" href="https://github.com/AhmedElKhouly99/JS-game-project-iti-intak42.git" target="_blank"> <img style="width: 5%; float: right;cursor: pointer;position: absolute;bottom: 0%;right: 0;" class="menu" id="Settings" src="images/More_Games_BTN.png " onmouseleave="this.src='images/More_Games_BTN.png'"  onmouseover="this.src='images/More_Games_BTN_on.png'">
 </a>
 
     <div id="difficulty" class="template" style="display: none;">
@@ -88,16 +88,17 @@
       <p class="" id="header">Player's Nickname</p>
       <form action="" id="loginS">
         <input type="text" placeholder="Enter your nickname" id="nickname">
+        <input onclick="c.play()" id="submitUser" type="submit" value="Play">
       </form>
     </div>
 
     <div id="usernameM" class="template" style="display: none;">
       <img class="background"  src="images/Window.png" alt="">
-      <p class="" id="header">Player's Nickname</p>
+      <p class="" id="header">Players Nicknames</p>
       <form action="" id="loginM">
-        <input type="text" placeholder="Enter your nickname" id="nickname1" required>
-        <input type="text" placeholder="Enter your nickname" id="nickname2" required>
-        <input type="submit">
+        <input type="text" placeholder="Player's 1 nickname" id="nickname1" required>
+        <input type="text" placeholder="Player's 2 nickname" id="nickname2" required>
+        <input onclick="c.play()" id="submitUser" type="submit" value="Play">
       </form>
     </div>
 
@@ -119,84 +120,7 @@
 
   </div>
 
-<script>
-  // const container = document.getElementById("container");
-  // const mainMenu = document.getElementsByClassName('menu');
-  // const difficulty = document.getElementById('difficulty');
-  // const settings = document.getElementById('settings');
-  // const info = document.getElementById('how-to-play');
-  // const pause = document.getElementById('pause-div');
-  // const music = new Audio('m.mp3');
-  // music.loop;
-  // let status = false;
-  // let level = 1;
 
-  // function mouseOver(btn,source){
-  //     btn.src=source;
-  //   }
-  //   function mouseOut(btn,source){
-  //     btn.src=source;
-  //   }
-
-  // function removeMenu(){
-  //   for(let i = 0; i<mainMenu.length; i++){
-  //     mainMenu[i].style.display = 'none';
-  //   }
-  // }
-
-  // function displayMenu(){
-  //   if(status){
-  //     for(let i = 0; i<settings.children.length; i++){
-  //       settings.children[i].classList.add('up');
-  //       settings.children[i].classList.remove('in');
-  //     }
-  //   }else{
-  //     for(let i = 0; i<mainMenu.length; i++){
-  //       mainMenu[i].style.display = 'inline';
-  //     }
-  //   }
-  // }
-
-  // function diplayDifficulty(){
-  //   difficulty.style.display='block';
-  //   difficulty.classList.remove('up');
-  // }
-
-  // function displayTemplate(p){
-  //   p.style.display='block';
-  //     for(let i = 0; i<p.children.length; i++){
-  //       p.children[i].classList.remove('up');
-  //       p.children[i].classList.add('in');
-  //     }
-
-  // }
-  
-  // function removeTemplate(p){
-  //     for(let i = 0; i<p.children.length; i++){
-  //       p.children[i].classList.add('up');
-  //       p.children[i].classList.remove('in');
-  //     }
-
-  // }
-
-  // function removeDiv(l){
-  //   status = true;
-  //   // setTimeout(()=>{container.style.display = "none";},800);
-  //   displayTemplate(pause);
-  //   // pause.style.display='block';
-  //   ID = level.id;
-  //   if(ID == 1){
-  //     level = 1;
-  //   }else if(ID == 2){
-  //     level = 2;
-  //   }else{
-  //     level = 3;
-  //   }
-  // }
-
-
-
-</script>
 <script src="game.js"></script>
 
 

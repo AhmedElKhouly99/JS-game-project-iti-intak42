@@ -115,8 +115,32 @@
   border: inset;
 }
 
+#nickname1, #nickname2, #submitUser{
+  display: block;
+  margin: auto;
+}
+#nickname1{
+  margin-top: 13%;
+}
+#nickname2{
+  margin-top: 3%;
+}
+#submitUser{
+  margin-top: 2%;
+  background-color: #e3f5f4;;
+  padding: 2%;
+  border-radius: 12px;
+  color: black;
+}
+
+#submitUser:hover{
+  box-shadow:0px 0px 15px 5px red;
+  color: red;
+}
+
 #nickname:focus, #nickname1:focus, #nickname2:focus{
   box-shadow:0px 0px 15px 5px red;
+  color: red;
 }
 
   #medium {

@@ -91,6 +91,7 @@ function removeDiv(level) {
     setTimeout(() => { container.style.display = "none"; }, 700);
     difficulty.style.display = 'none';
     mode.style.display = 'none';
+    settings.style.display = 'none';
     usernameM.style.display = 'none';
     usernameS.style.display = 'none';
     play = true;
@@ -145,6 +146,7 @@ document.getElementById('music').addEventListener('click', () => {
 /// Single mode
 loginS.addEventListener('submit', (e)=>{
     e.preventDefault();
+    c.play();
     removeTemplate(usernameS);
     removeDiv(loginS);
 
