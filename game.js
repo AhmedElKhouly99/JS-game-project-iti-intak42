@@ -181,7 +181,7 @@ class Player {
         this.speedX = 0;
         this.speedY = 10;
         this.playerImage = new Image();
-        this.playerImage.src = 'player.png';
+        this.playerImage.src = 'player2.png';
 
         this.movingLeft = false;
         this.movingRight = false;
@@ -410,8 +410,8 @@ window.addEventListener('blur', () => {
 
 
 function updateScore() {
-    artArea.fillStyle = "black";
-    artArea.font = "30px";
+    artArea.fillStyle = "#c2d2d4";
+    artArea.font = "30px myfont";
     artArea.fillText('score:' + score, 50, 50);
 }
 
