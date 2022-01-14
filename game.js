@@ -680,4 +680,3 @@ function startNewGame() {
     console.log("Game Started");
     console.log(players[0].username);
 }
-})
