@@ -171,13 +171,10 @@ loginM.addEventListener('submit', (e)=>{
 
 ///// Restart
 restart.addEventListener('click', ()=>{
-<<<<<<< HEAD
 
 
-=======
     startNewGame(['islam']);
     
->>>>>>> 9bef18f265afce8f29a816a0573d565d370eb32a
 });
 
 

@@ -104,18 +104,19 @@
   top: 50%;
 }
 
-#username #header{
+#usernameS #header, #usernameM #header{
   font-size: large;
 }
 
-#nickname{
+#nickname, #nickname1, #nickname2{
   margin-top: 18%;
   padding: 2% 0;
   border-radius: 15px;
   border: inset;
+  display: block;
 }
 
-#nickname:focus{
+#nickname:focus, #nickname1:focus, #nickname2:focus{
   box-shadow:0px 0px 15px 5px red;
 }
 
