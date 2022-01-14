@@ -244,7 +244,7 @@
  
   }
   
-  #restart-img, #setting-img, #menu-img, #close-img{
+  #restart-img, #setting-img, #menu-img, #close-img, #menu-img1, #menu-img2, #restart-img1, #restart-img2{
     width: 75px;
     height: 75px;
     position: absolute;
@@ -259,7 +259,7 @@
   #setting-img {
     left: 43.5%;
   }
-  #menu-img {
+  #menu-img, #menu-img1, #menu-img2{
     
     left: 50.5%;
     
@@ -296,8 +296,25 @@
     font-size: 12px;
     color: wheat;
   }
-  #how-to-play #menu-img {
+  #how-to-play #menu-img{
     left: 0;
     right: 0;
     margin: auto;
+  }
+
+  #gameover #header{
+    color: red;
+  }
+
+  #win-tie #header{
+    color: #6eff6e;
+  }
+
+ #restart-img1, #restart-img2{
+    margin: auto 43%;
+  }
+
+  #win-tie #score-p{
+    animation: blink 2s infinite;
+  -webkit-animation: blink 2s infinite;
   }

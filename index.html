@@ -28,7 +28,7 @@
     <img onclick="c.play();window.close();" style="width: 20%;cursor: pointer;" class="menu" id="Exit"
       src="images/Exit_BTN.png">
 
-    <img onclick="c.play()" style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;"
+    <img onclick="c.play(); displayWinnerTie('Ahmed', 5000, false);" style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;"
       class="menu" id="How_To_Play" src="images/Rating_BTN.png" onmouseleave="this.src='images/Rating_BTN.png'"
       onmouseover="this.src='images/Rating_BTN_on.png'">
     <a onclick="c.play()" href="https://github.com/AhmedElKhouly99/JS-game-project-iti-intak42.git" target="_blank">
@@ -88,7 +88,7 @@
       <p id="score-p">Your Score</p>
 
       <img onmouseover="mouseOver(this,'images/Replay_BTN-active.png')"
-        onmouseout="mouseOut(this,'images/Replay_BTN.png')" onclick="c.play();removeTemplate(pause);removeDiv(this)"
+        onmouseout="mouseOut(this,'images/Replay_BTN.png')" onclick="c.play();"
         class="icon" id="restart-img" src="images\Replay_BTN.png" alt="">
       <img onmouseover="mouseOver(this,'images/Settings_BTN-active.png')"
         onmouseout="mouseOut(this,'images/Settings_BTN.png')"
@@ -131,17 +131,33 @@
     <div id="gameover" class="template" style="display: none;">
       <img class="background" id="pause-background-img" src="images\PNG\Pause\Window.png" alt="">
 
-      <p class="" id="header">Pause</p>
+      <p class="" id="header">Game Over</p>
       <img id="score-box" src="images\PNG\Pause\Table.png" alt="">
       <p id="score-content"></p>
       <p id="score-p">Your Score</p>
 
       <img onmouseover="mouseOver(this,'images/Replay_BTN-active.png')"
-        onmouseout="mouseOut(this,'images/Replay_BTN.png')" class="icon" id="restart-img" src="images\Replay_BTN.png"
+        onmouseout="mouseOut(this,'images/Replay_BTN.png')" class="icon" id="restart-img1" src="images\Replay_BTN.png"
         alt="">
 
       <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')"
-        onclick="c.play();play = false;" class="icon" id="menu-img" src="images\Menu_BTN.png" alt="">
+        onclick="c.play();play = false;removeTemplate(gameover);displayMenu()" class="icon" id="menu-img1" src="images\Menu_BTN.png" alt="">
+    </div>
+
+    <div id="win-tie" class="template" style="display: none;">
+      <img class="background" id="pause-background-img" src="images\PNG\Pause\Window.png" alt="">
+
+      <p class="" id="header">Winner</p>
+      <img id="score-box" src="images\PNG\Pause\Table.png" alt="">
+      <p id="score-content"></p>
+      <p id="score-p">Player's name</p>
+
+      <img onmouseover="mouseOver(this,'images/Replay_BTN-active.png')"
+        onmouseout="mouseOut(this,'images/Replay_BTN.png')" class="icon" id="restart-img2" src="images\Replay_BTN.png"
+        alt="">
+
+      <img onmouseover="mouseOver(this,'images/Menu_BTN-acive.png')" onmouseout="mouseOut(this,'images/Menu_BTN.png')"
+        onclick="c.play();play = false;removeTemplate(gameover);displayMenu()" class="icon" id="menu-img2" src="images\Menu_BTN.png" alt="">
     </div>
 
 
