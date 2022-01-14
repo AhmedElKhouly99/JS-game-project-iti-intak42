@@ -79,15 +79,24 @@
     <div id="mode" class="template" style="display: none;">
       <img class="background"  src="images/Window.png" alt="">
       <p class="" id="header">Game Mode</p>
-      <p onclick="c.play();removeTemplate(mode);displayTemplate(username);" class="" id="single">Single</p>
-      <p onclick="c.play();removeTemplate(mode);removeDiv(this);" class="" id="multi">Multiplayer</p>
+      <p onclick="c.play();removeTemplate(mode);displayTemplate(usernameS);" class="" id="single">Single</p>
+      <p onclick="c.play();removeTemplate(mode);displayTemplate(usernameM);" class="" id="multi">Multiplayer</p>
     </div>
 
-    <div id="username" class="template" style="display: none;">
+    <div id="usernameS" class="template" style="display: none;">
       <img class="background"  src="images/Window.png" alt="">
       <p class="" id="header">Player's Nickname</p>
-      <form action="" id="login">
+      <form action="" id="loginS">
         <input type="text" placeholder="Enter your nickname" id="nickname">
+      </form>
+    </div>
+
+    <div id="usernameM" class="template" style="display: none;">
+      <img class="background"  src="images/Window.png" alt="">
+      <p class="" id="header">Player's Nickname</p>
+      <form action="" id="loginM">
+        <input type="text" placeholder="Enter your nickname" id="nickname1" required>
+        <input type="text" placeholder="Enter your nickname" id="nickname2" required>
       </form>
     </div>
 
