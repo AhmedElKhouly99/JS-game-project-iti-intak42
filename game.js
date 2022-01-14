@@ -168,6 +168,7 @@ function displayWinnerTie(name, score, isTie) {
     setting_menu = false;
     container.style.display = 'block';
     pause.style.display = 'none';
+    b.pause();
     displayTemplate(winTie);
     if (isTie) {
         winTie.children[1].textContent = 'Draw';
@@ -196,6 +197,7 @@ function displayRankings(users){
 displayRankings([{name:'ahmed',score:5000}, {name:'islam', score:3000}]);
 
 function gameOver(score){
+    b.pause();
     gameover.children[3].innerHTML = score;
     setting_menu = false;
     container.style.display = 'block';
