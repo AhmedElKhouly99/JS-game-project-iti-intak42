@@ -181,7 +181,7 @@ class Player {
         this.speedX = 0;
         this.speedY = 10;
         this.playerImage = new Image();
-        this.playerImage.src = 'player2.png';
+        this.playerImage.src = 'player.png';
 
         this.movingLeft = false;
         this.movingRight = false;
@@ -280,12 +280,12 @@ var p2 = new Player(player2Conrollers);
 
 class Bullet {
     constructor(player) {
-        this.width = 30;
+        this.width = 50;
         this.height = 40;
-        this.currentX = player.currentX + Math.floor(player.width / 2.6);
+        this.currentX = player.currentX + Math.floor(player.width / 2);
         this.speedX = 10;
         this.speedY = 0;
-        this.currentY = player.currentY - this.height + this.speedY;
+        this.currentY = player.currentY +this.height;
         this.hitBird = false;
         this.crossedHiegt = false;
         this.fireImage = new Image();
@@ -443,21 +443,6 @@ window.addEventListener('keydown', (e) => {
 
 
 
-    /*
-    if (e.key === 'ArrowRight') {
-
-        p.moveRight();
-
-    }
-    if (e.key === 'ArrowLeft') {
-
-        p.moveLeft();
-
-    }
-    if (e.code === 'Space')
-        p.fire();
-
-        */
 
 })
 
