@@ -143,6 +143,7 @@ login.addEventListener('submit', (e)=>{
     e.preventDefault();
     removeTemplate(username);
     removeDiv(login);
+    nickname.value = '';
 
 
 });
