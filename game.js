@@ -527,14 +527,16 @@ function checkEndOfGame(){
         if(!players[0].isAlive()){
             play = 0;
             console.log("Game Over");
+            gameOver(players[0].score);
             /////////////////////////////////////////////////////////////////////////////
         }
     }
     else{
         if(!(players[0].isAlive() || players[1].isAlive())){
             console.log("Both Died");
+            play = false;
             if(players[0].score == players[1].score){   //Tie
-                displayWinnerTie('', 0, true);
+                displayWinnerTie('', players[0].score, true);
             }else if(players[0].score > players[1].score){  //Player 1 wins
                 displayWinnerTie(players[0].username, players[0].score, false)
             }else{
