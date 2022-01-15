@@ -52,7 +52,10 @@ function getLocalStorage() {
     allUsers.splice(0, allUsers.length);
     lengOfUsers = localStorage.length;
     while (lengOfUsers--) {
-        allUsers.push(new Users(localStorage.key(lengOfUsers), JSON.parse(localStorage.getItem(localStorage.key(lengOfUsers)))));
+        let s = localStorage.key(lengOfUsers);
+        if(s.indexOf('_') == 0){        
+            allUsers.push(new Users(s.slice(1,s.length), JSON.parse(localStorage.getItem(localStorage.key(lengOfUsers)))));
+        }
     }
     allUsers.sort((u1, u2) => {
         if (u1.score > u2.score) return -1
@@ -611,16 +614,16 @@ function generateNewFrame() {
 }
 
 function ckeckLocalStorage(isMulti) {
-    if (localStorage.getItem(players[0].username) == null) {
-        localStorage.setItem(players[0].username, players[0].score);
-    } else if (JSON.parse(localStorage.getItem(players[0].username)) < players[0].score) {
-        localStorage.setItem(players[0].username, players[0].score);
+    if (localStorage.getItem('_'+players[0].username) == null) {
+        localStorage.setItem('_'+players[0].username, players[0].score);
+    } else if (JSON.parse(localStorage.getItem('_'+players[0].username)) < players[0].score) {
+        localStorage.setItem('_'+players[0].username, players[0].score);
     }
     if (isMulti) {
-        if (localStorage.getItem(players[1].username) == null) {
-            localStorage.setItem(players[1].username, players[1].score);
-        } else if (JSON.parse(localStorage.getItem(players[1].username)) < players[1].score) {
-            localStorage.setItem(players[1].username, players[1].score);
+        if (localStorage.getItem('_'+players[1].username) == null) {
+            localStorage.setItem('_'+players[1].username, players[1].score);
+        } else if (JSON.parse(localStorage.getItem('_'+players[1].username)) < players[1].score) {
+            localStorage.setItem('_'+players[1].username, players[1].score);
         }
     }
 }
