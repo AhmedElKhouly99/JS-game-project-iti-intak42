@@ -36,6 +36,33 @@ let level = 1;
 let setting_menu = false;
 let lives = 3;
 var playerNames = [];
+let allUsers = [];
+let lengOfUsers;
+
+let users = {
+    name : '',
+    score: 0
+};
+
+class Users{
+    constructor(name, score){
+        this.name = name;
+        this.score = score;
+    }
+}
+
+function getLocalStorage(){
+    allUsers.splice(0,allUsers.length);
+    lengOfUsers = localStorage.length;
+    while (lengOfUsers--) {
+        allUsers.push(new Users( localStorage.key(lengOfUsers),JSON.parse(localStorage.getItem(localStorage.key(lengOfUsers)))));
+    }
+    allUsers.sort((u1,u2)=>{
+        if (u1.score > u2.score) return -1
+        return u1.score < u2.score ? 1 : 0
+    });
+}
+
 
 function playMusic() {
     music.play();
@@ -176,6 +203,7 @@ function displayWinnerTie(name, score, isTie) {
     if (isTie) {
         winTie.children[1].textContent = 'Draw';
         winTie.children[1].style.color = '#e3f5f4';
+        winTie.children[4].id = 'score-p';
         winTie.children[4].textContent = 'Score';
     } else {
         winTie.children[1].textContent = 'Winner';
@@ -188,16 +216,18 @@ function displayWinnerTie(name, score, isTie) {
 
 
 
-function displayRankings(users){
+function displayRankings(){
+    getLocalStorage();
     rankings.children[2].innerHTML = '';
     let i = 0;
-    users.forEach((user)=>{
+    allUsers.forEach((user)=>{
         rankings.children[2].innerHTML += `<p>${i+1}-${user.name}          ${user.score}</p>`;
         i++;
     });
 }
 
-displayRankings([{name:'ahmed',score:5000}, {name:'islam', score:3000}]);
+// displayRankings([{name:'ahmed',score:5000}, {name:'islam', score:3000}]);
+// displayRankings(allUsers);
 
 function gameOver(score){
     b.pause();
@@ -299,6 +329,7 @@ var bullets = [];
 
 var multiplayer = false;
 var players = [];
+
 
 
 
@@ -543,6 +574,11 @@ function checkEndOfGame(){
             console.log("Game Over");
             gameOver(players[0].score);
             /////////////////////////////////////////////////////////////////////////////
+            if(localStorage.getItem(players[0].username) == null){
+                localStorage.setItem(players[0].username, players[0].score);
+            }else if(JSON.parse(localStorage.getItem(players[0].username))<players[0].score){
+                localStorage.setItem(players[0].username, players[0].score);
+            }
         }
     }
     else{
