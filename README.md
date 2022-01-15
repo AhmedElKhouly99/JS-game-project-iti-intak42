@@ -8,7 +8,8 @@ this project for learning and practice JavaScript
 
 # Note
 this game running stand alone you don`t need to refersh everthing is Dynamic into it.
-
+# Link
+-  https://shafey01.github.io/beasts-game-v4/
 # image
 
 ![img](https://drive.google.com/uc?export=view&id=13E4m3NXvh3EWEXgpyPZhggabkEujV14_)
