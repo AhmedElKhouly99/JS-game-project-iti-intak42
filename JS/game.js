@@ -312,6 +312,7 @@ function setPauseMenuScore(score) {
 
 const frameRate = 40;
 const frameTimeOut = 1000 / frameRate;
+const maxTimeBetweenBirds = 500;
 
 
 const canvas = document.getElementById("canvas");
@@ -712,9 +713,22 @@ function filtering() {
 }
 
 //creating new bird after 400ms
+
+/*
 setInterval(() => {
     if (play) birds.push(new Bird());
 }, 400);
+*/
+
+
+function generateNewBird(){
+    if(play){
+        birds.push(new Bird());
+    }
+    setTimeout(generateNewBird, maxTimeBetweenBirds * Math.random());
+}
+
+generateNewBird();
 
 
 
