@@ -221,7 +221,7 @@ function displayRankings(){
     rankings.children[2].innerHTML = '';
     let i = 0;
     allUsers.forEach((user)=>{
-        rankings.children[2].innerHTML += `<p>${i+1}-${user.name}          ${user.score}</p>`;
+        rankings.children[2].innerHTML += `<p>${i+1}-${user.name}  : ${user.score}</p>`;
         i++;
     });
 }
