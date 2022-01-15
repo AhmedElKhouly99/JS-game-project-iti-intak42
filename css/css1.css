@@ -78,6 +78,11 @@
     margin-bottom: 2.2%;
   }
 
+  #Play:hover, #Exit:hover{
+    border-radius: 20px;
+    box-shadow:0px 0px 15px 5px red;
+  }
+
   #easy,
   #medium,
   #hard, #single, #multi {
