@@ -8,7 +8,7 @@ const info = document.getElementById('how-to-play');
 const pause = document.getElementById('pause-div');
 const mode = document.getElementById('mode');
 const single = document.getElementById('single');
-const multi =  document.getElementById("multi");
+const multi = document.getElementById("multi");
 const gameover = document.getElementById('gameover');
 const winTie = document.getElementById('win-tie');
 const rankings = document.getElementById('rankings');
@@ -40,24 +40,24 @@ let allUsers = [];
 let lengOfUsers;
 
 let users = {
-    name : '',
+    name: '',
     score: 0
 };
 
-class Users{
-    constructor(name, score){
+class Users {
+    constructor(name, score) {
         this.name = name;
         this.score = score;
     }
 }
 
-function getLocalStorage(){
-    allUsers.splice(0,allUsers.length);
+function getLocalStorage() {
+    allUsers.splice(0, allUsers.length);
     lengOfUsers = localStorage.length;
     while (lengOfUsers--) {
-        allUsers.push(new Users( localStorage.key(lengOfUsers),JSON.parse(localStorage.getItem(localStorage.key(lengOfUsers)))));
+        allUsers.push(new Users(localStorage.key(lengOfUsers), JSON.parse(localStorage.getItem(localStorage.key(lengOfUsers)))));
     }
-    allUsers.sort((u1,u2)=>{
+    allUsers.sort((u1, u2) => {
         if (u1.score > u2.score) return -1
         return u1.score < u2.score ? 1 : 0
     });
@@ -131,7 +131,7 @@ function removeDiv() {
     play = true;
     playBird();
     playMusic()
-    
+
 }
 ////// menu btn
 document.getElementById('menu-img').addEventListener('click', () => {
@@ -193,7 +193,7 @@ document.getElementById('music').addEventListener('click', () => {
 
 
 function displayWinnerTie(name, score, isTie) {
-    
+
     container.style.display = 'block';
     setting_menu = false;
     container.style.display = 'block';
@@ -211,25 +211,23 @@ function displayWinnerTie(name, score, isTie) {
         winTie.children[4].id = 'score-p';
         winTie.children[4].textContent = name;
     }
-    winTie.children[3].textContent = score; 
+    winTie.children[3].textContent = score;
 }
 
 
 
-function displayRankings(){
+function displayRankings() {
     getLocalStorage();
     rankings.children[2].innerHTML = '';
     let i = 0;
-    allUsers.forEach((user)=>{
-        rankings.children[2].innerHTML += `<p>${i+1}-${user.name}  : ${user.score}</p>`;
+    allUsers.forEach((user) => {
+        rankings.children[2].innerHTML += `<p>${i + 1}-${user.name}  : ${user.score}</p>`;
         i++;
     });
 }
 
-// displayRankings([{name:'ahmed',score:5000}, {name:'islam', score:3000}]);
-// displayRankings(allUsers);
 
-function gameOver(score){
+function gameOver(score) {
     b.pause();
     gameover.children[3].innerHTML = score;
     setting_menu = false;
@@ -237,7 +235,6 @@ function gameOver(score){
     pause.style.display = 'none';
     displayTemplate(gameover);
 }
-
 
 
 /// Single mode
@@ -276,27 +273,27 @@ loginM.addEventListener('submit', (e) => {
 
 
 ///// Restart btn
-restart.addEventListener('click', ()=>{
+restart.addEventListener('click', () => {
 
     removeTemplate(pause);
     removeDiv(this);
     startNewGame(['islam']);
     console.log("Restarting Game");
     startNewGame();
-    
+
 });
 
-document.getElementById('restart-img1').addEventListener('click', ()=>{
+document.getElementById('restart-img1').addEventListener('click', () => {
 
     removeTemplate(gameover);
     removeDiv(this);
     startNewGame(['islam']);
     console.log("Restarting Game");
     startNewGame();
-    
+
 });
 
-document.getElementById('restart-img2').addEventListener('click', ()=>{
+document.getElementById('restart-img2').addEventListener('click', () => {
 
     removeTemplate(winTie);
     winTie.children[4].id = '';
@@ -308,7 +305,7 @@ document.getElementById('restart-img2').addEventListener('click', ()=>{
 });
 
 
-function setPauseMenuScore(score){
+function setPauseMenuScore(score) {
     pause.children[3].innerHTML = score
 }
 
@@ -342,8 +339,8 @@ class Bird {
         /////////////////////////////////
         this.width = 80;
         this.height = 80;
-        this.speedX = Math.max(Math.random() *  10 * level, 2);
-        this.speedY = Math.random() *  50;
+        this.speedX = Math.max(Math.random() * 10 * level, 2);
+        this.speedY = Math.random() * 50;
         this.currentX = canvasWidth;
         this.currentY = this.speedY + Math.random() * (canvasHeight - 2 * this.speedY - this.height);
         this.alive = true;
@@ -410,13 +407,13 @@ class Player {
 
     }
 
-    isAlive(){
+    isAlive() {
         return this.lives >= 1;
     }
 
-    incrementLives(){
+    incrementLives() {
         this.lives++;
-        if(this.lives > 3)
+        if (this.lives > 3)
             this.lives = 3;
     }
 
@@ -426,7 +423,7 @@ class Player {
 
     incrementScore() {
         this.score++;
-        if(this.score % 10 == 0){
+        if (this.score % 10 == 0) {
             this.incrementLives();
         }
     }
@@ -492,7 +489,7 @@ class Player {
     }
 
     draw() {
-        if(this.isAlive()){
+        if (this.isAlive()) {
             artArea.drawImage(this.playerImage, this.currentX, this.currentY, this.width, this.height);
         }
     }
@@ -565,46 +562,40 @@ function test() {
     checkEndOfGame();
 }
 
-function ckeckLocalStorage(isMulti){
-    if(localStorage.getItem(players[0].username) == null){
+function ckeckLocalStorage(isMulti) {
+    if (localStorage.getItem(players[0].username) == null) {
         localStorage.setItem(players[0].username, players[0].score);
-    }else if(JSON.parse(localStorage.getItem(players[0].username))<players[0].score){
+    } else if (JSON.parse(localStorage.getItem(players[0].username)) < players[0].score) {
         localStorage.setItem(players[0].username, players[0].score);
     }
-    if(isMulti){
-        if(localStorage.getItem(players[1].username) == null){
+    if (isMulti) {
+        if (localStorage.getItem(players[1].username) == null) {
             localStorage.setItem(players[1].username, players[1].score);
-        }else if(JSON.parse(localStorage.getItem(players[1].username))<players[1].score){
+        } else if (JSON.parse(localStorage.getItem(players[1].username)) < players[1].score) {
             localStorage.setItem(players[1].username, players[1].score);
         }
     }
 }
 
 
-function checkEndOfGame(){
-    if(!multiplayer){   //Single Player
-        if(!players[0].isAlive()){
+function checkEndOfGame() {
+    if (!multiplayer) {   //Single Player
+        if (!players[0].isAlive()) {
             play = 0;
             console.log("Game Over");
             gameOver(players[0].score);
             /////////////////////////////////////////////////////////////////////////////
-            // if(localStorage.getItem(players[0].username) == null){
-            //     localStorage.setItem(players[0].username, players[0].score);
-            // }else if(JSON.parse(localStorage.getItem(players[0].username))<players[0].score){
-            //     localStorage.setItem(players[0].username, players[0].score);
-            // }
-            // ckeckLocalStorage(multiplayer);
         }
     }
-    else{
-        if(!(players[0].isAlive() || players[1].isAlive())){
+    else {
+        if (!(players[0].isAlive() || players[1].isAlive())) {
             console.log("Both Died");
             play = false;
-            if(players[0].score == players[1].score){   //Tie
+            if (players[0].score == players[1].score) {   //Tie
                 displayWinnerTie('', players[0].score, true);
-            }else if(players[0].score > players[1].score){  //Player 1 wins
+            } else if (players[0].score > players[1].score) {  //Player 1 wins
                 displayWinnerTie(players[0].username, players[0].score, false)
-            }else{
+            } else {
                 displayWinnerTie(players[1].username, players[1].score, false)
             }
         }
@@ -628,9 +619,6 @@ function detectBirdCollision() {
             if (isPointInRectangle(pointX, pointY, bird.currentX, bird.currentY, bird.width, bird.height)) {
                 bullet.ownerPlayer.incrementScore();
                 ////////////////////////////////////////////////////////////////////////////////////
-                //localStorage.score=sCore;
-                /////////////////////////////////////////////////////////////////////////////////////
-                //document.getElementById("score-content").innerText=localStorage.score;
                 bird.alive = false;
                 bullet.hitBird = true;
             }
@@ -659,15 +647,15 @@ setInterval(() => {
 function deleteCrossed() {
 
     bullets.forEach((bullet) => {
-        if(bullet.currentX  - bullet.width > canvasWidth ||bullet.currentX < 0 || bullet.currentY + bullet.height < 0 || bullet.currentY > canvasHeight)
+        if (bullet.currentX - bullet.width > canvasWidth || bullet.currentX < 0 || bullet.currentY + bullet.height < 0 || bullet.currentY > canvasHeight)
             bullet.crossed = true;
     })
 
 
     players.forEach((player) => {
-        if(player.isAlive()){
+        if (player.isAlive()) {
             birds.forEach((bird) => {
-    
+
                 if (isPointInRectangle(bird.currentX, bird.currentY, player.currentX, player.currentY, player.width, player.height) ||
                     isPointInRectangle(bird.currentX + bird.width, bird.currentY, player.currentX, player.currentY, player.width, player.height) ||
                     isPointInRectangle(bird.currentX, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height) ||
@@ -705,9 +693,9 @@ window.addEventListener('blur', () => {
     b.pause();
     if (setting_menu) {
         displayTemplate(pause);
-        if(multiplayer){
-            setPauseMenuScore((players[0].getScore()+' : ' +players[1].getScore()));
-        }else{
+        if (multiplayer) {
+            setPauseMenuScore((players[0].getScore() + ' : ' + players[1].getScore()));
+        } else {
             setPauseMenuScore(players[0].getScore());
         }
     }
@@ -723,17 +711,17 @@ function updateScore(multiplayer, Player) {
     let player1 = Player[0];
     let player2 = Player[1];
     if (!multiplayer) {
-        
+
 
         artArea.fillText(player1.username + " 's score : " + player1.score, 50, 50);
-        drawLives(player1,canvasWidth-120,40);
+        drawLives(player1, canvasWidth - 120, 40);
     }
     else {
 
         artArea.fillText(player1.username + " 's score : " + player1.score, 50, 50);
-        drawLives(player1,200,70);
+        drawLives(player1, 200, 70);
         artArea.fillText(player2.username + " 's score : " + player2.score, canvasWidth - 450, 50);
-        drawLives(player2,canvasWidth-300,70);
+        drawLives(player2, canvasWidth - 300, 70);
     }
 }
 
@@ -741,20 +729,20 @@ function drawLives(player, px, py) {
     let lifes = new Image();
     if (player.lives == 3) {
         lifes.src = "images/lives3.png";
-        artArea.drawImage(lifes,px,py,60,40 );
+        artArea.drawImage(lifes, px, py, 60, 40);
     }
     else if (player.lives == 2) {
         lifes.src = "images/life2.png";
-        artArea.drawImage(lifes,px,py,60,40);
+        artArea.drawImage(lifes, px, py, 60, 40);
     }
     else if (player.lives == 1) {
         lifes.src = "images/life1.png";
-        artArea.drawImage(lifes,px,py,60,40);
+        artArea.drawImage(lifes, px, py, 60, 40);
     }
     else {
         //No Lives left
         //play = 0;
-        
+
         console.log("Player Died");
     }
 }
@@ -772,18 +760,18 @@ window.addEventListener('keydown', (e) => {
 
     keyFlags[e.key] = true;
 
-    if(e.key == 'Escape'){
+    if (e.key == 'Escape') {
         container.style.display = 'block';
         b.pause();
         if (setting_menu) {
             displayTemplate(pause);
 
-            if(multiplayer){
-                setPauseMenuScore((players[0].getScore()+' : ' +players[1].getScore()));
-            }else{
+            if (multiplayer) {
+                setPauseMenuScore((players[0].getScore() + ' : ' + players[1].getScore()));
+            } else {
                 setPauseMenuScore(players[0].getScore());
             }
-            
+
         }
         play = false;
     }
