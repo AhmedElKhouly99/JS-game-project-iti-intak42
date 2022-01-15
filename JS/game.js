@@ -93,6 +93,8 @@ function displayMenu() {
         removeTemplate(settings)
         displayTemplate(pause);
     } else {
+        // removeTemplate(gameover);
+        // gameover.style.display = 'none'
         for (let i = 0; i < mainMenu.length; i++) {
             mainMenu[i].style.display = 'inline';
         }
@@ -230,7 +232,7 @@ function gameOver(score) {
     b.pause();
     music.pause();
     l.play();
-    setTimeout(playMusic, 3000);
+    setTimeout(playMusic, 2000);
     gameover.children[3].innerHTML = score;
     setting_menu = false;
     container.style.display = 'block';
