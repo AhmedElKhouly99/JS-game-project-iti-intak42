@@ -232,7 +232,7 @@ function gameOver(score) {
     b.pause();
     music.pause();
     l.play();
-    setTimeout(playMusic, 2000);
+    setTimeout(playMusic, 1000);
     gameover.children[3].innerHTML = score;
     setting_menu = false;
     container.style.display = 'block';
