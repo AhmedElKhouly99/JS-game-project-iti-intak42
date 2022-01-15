@@ -747,6 +747,7 @@ window.addEventListener('blur', () => {
     container.style.display = 'block';
     b.pause();
     if (setting_menu) {
+        removeTemplate(settings);
         displayTemplate(pause);
         if (multiplayer) {
             setPauseMenuScore((players[0].getScore() + ' : ' + players[1].getScore()));
