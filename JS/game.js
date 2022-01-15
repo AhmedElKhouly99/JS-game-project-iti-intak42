@@ -32,6 +32,7 @@ const b = new Audio('sound/b.wav');
 const c = new Audio('sound/c.wav');
 const f = new Audio('sound/f.wav');
 music.setAttribute('loop', 'true');
+music.volume = 0.4;
 let level = 1;
 let setting_menu = false;
 let lives = 3;
@@ -39,10 +40,6 @@ var playerNames = [];
 let allUsers = [];
 let lengOfUsers;
 
-let users = {
-    name: '',
-    score: 0
-};
 
 class Users {
     constructor(name, score) {
