@@ -32,6 +32,7 @@ const b = new Audio('sound/b.wav');
 const c = new Audio('sound/c.wav');
 const f = new Audio('sound/f.wav');
 const l = new Audio('sound/l.wav');
+const e = new Audio('sound/e.wav');
 music.setAttribute('loop', 'true');
 music.volume = 0.15;
 let level = 1;
@@ -138,7 +139,6 @@ function removeDiv() {
 document.getElementById('menu-img').addEventListener('click', () => {
     if (confirm("Are You Sure !?")) {
         setting_menu = false;
-        console.log(setting_menu);
         removeTemplate(pause);
         displayMenu();
         artArea.clearRect(0, 0, canvas.width, canvas.height);
@@ -148,7 +148,6 @@ document.getElementById('menu-img').addEventListener('click', () => {
 document.getElementById('menu-img1').addEventListener('click', () => {
     if (confirm("Are You Sure !?")) {
         setting_menu = false;
-        console.log(setting_menu);
         removeTemplate(gameover);
         displayMenu();
         artArea.clearRect(0, 0, canvas.width, canvas.height);
@@ -158,8 +157,7 @@ document.getElementById('menu-img1').addEventListener('click', () => {
 document.getElementById('menu-img2').addEventListener('click', () => {
     if (confirm("Are You Sure !?")) {
         setting_menu = false;
-        console.log(setting_menu);
-        winTie.children[4].id = ''
+        winTie.children[4].id = '';
         removeTemplate(winTie);
         displayMenu();
         artArea.clearRect(0, 0, canvas.width, canvas.height);
@@ -282,7 +280,6 @@ restart.addEventListener('click', () => {
     removeTemplate(pause);
     removeDiv(this);
     startNewGame(['islam']);
-    console.log("Restarting Game");
     startNewGame();
 
 });
@@ -292,7 +289,6 @@ document.getElementById('restart-img1').addEventListener('click', () => {
     removeTemplate(gameover);
     removeDiv(this);
     startNewGame(['islam']);
-    console.log("Restarting Game");
     startNewGame();
 
 });
@@ -303,7 +299,6 @@ document.getElementById('restart-img2').addEventListener('click', () => {
     winTie.children[4].id = '';
     removeDiv(this);
     startNewGame(['islam']);
-    console.log("Restarting Game");
     startNewGame();
 
 });
@@ -426,6 +421,7 @@ class Player {
 
     die(){
         explosions.push(new Explosion(this.currentX, this.currentY, 1));
+        e.play();
         console.log("Player Died");
     }
 
