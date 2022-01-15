@@ -427,7 +427,7 @@ class Player {
 
     incrementScore() {
         this.score++;
-        if (this.score % 10 == 0) {
+        if (this.score % 25 == 0) {
             this.incrementLives();
         }
     }
@@ -536,7 +536,57 @@ class Bullet {
     }
 }
 
+const explosion_images = ['images/explosions/bird_explosion.png', 'images/explosions/rocket_explosion.png'];
+var explosions = [];
 
+class Explosion{
+    constructor(x, y, type){    //if bird, type = 0 but if spaceship, type = 1
+        this.currentX = x;
+        this.currentY = y;
+
+        this.width = 80;
+        this.height = 80;
+
+        this.explosionImage = new Image();
+        this.explosionImage.src = 'images/explosions/bird_explosion.png';
+
+        this.currentFrame = 0;
+        this.frameWidth = 128;
+        this.frameHight = 128;
+        this.frameCount = 64;
+        this.frameRows = 8;
+        this.framColumns = 8;
+
+        this.done = false;
+    }
+    draw(){
+        if(this.done){
+            return;
+        }
+        else{
+            var imageOffsetX = (this.currentFrame % this.frameRows) * this.frameWidth;
+            var imageOffsetY = Math.floor((this.currentFrame / this.framColumns)) * this.frameHight;
+            console.log("__________________________________-");
+            console.log(imageOffsetX);
+            console.log(imageOffsetY);
+            artArea.drawImage(this.explosionImage , imageOffsetX, imageOffsetY, this.frameWidth, this.frameHight, this.currentX, this.currentY, this.width, this.height);
+        }
+    }
+    updateState(){
+        this.currentFrame++;
+        if(this.currentFrame >= this.frameCount){
+            this.done = true;
+        }
+    }
+}
+
+
+function drawEplosions(){
+    explosions.forEach((explosion) => {
+        explosion.draw();
+        explosion.updateState();
+    })
+}
 
 
 
@@ -549,6 +599,7 @@ function generateNewFrame() {
         return;
     artArea.clearRect(0, 0, canvasWidth, canvasHeight);
     detectBirdCollision();
+    drawEplosions();
     filtering();
     deleteCrossed();
 
@@ -622,6 +673,7 @@ function detectBirdCollision() {
                 isPointInRectangle(bullet.currentX + bullet.width, bullet.currentY + bullet.height, bird.currentX, bird.currentY, bird.width, bird.height)) {
                 bullet.ownerPlayer.incrementScore();
                 ////////////////////////////////////////////////////////////////////////////////////
+                explosions.push(new Explosion(bird.currentX, bird.currentY, 0));
                 bird.alive = false;
                 bullet.hitBird = true;
             }
