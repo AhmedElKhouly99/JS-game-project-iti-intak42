@@ -31,6 +31,7 @@ const music = new Audio('sound/m.mp3');
 const b = new Audio('sound/b.wav');
 const c = new Audio('sound/c.wav');
 const f = new Audio('sound/f.wav');
+const l = new Audio('sound/l.wav');
 music.setAttribute('loop', 'true');
 music.volume = 0.15;
 let level = 1;
@@ -229,6 +230,9 @@ function displayRankings() {
 
 function gameOver(score) {
     b.pause();
+    music.pause();
+    l.play();
+    setTimeout(playMusic, 3000);
     gameover.children[3].innerHTML = score;
     setting_menu = false;
     container.style.display = 'block';
@@ -741,6 +745,7 @@ window.addEventListener('blur', () => {
     container.style.display = 'block';
     b.pause();
     if (setting_menu) {
+        removeTemplate(settings);
         displayTemplate(pause);
         if (multiplayer) {
             setPauseMenuScore((players[0].getScore() + ' : ' + players[1].getScore()));
