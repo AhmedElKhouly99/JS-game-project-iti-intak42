@@ -32,7 +32,7 @@ const b = new Audio('sound/b.wav');
 const c = new Audio('sound/c.wav');
 const f = new Audio('sound/f.wav');
 music.setAttribute('loop', 'true');
-music.volume = 0.4;
+music.volume = 0.15;
 let level = 1;
 let setting_menu = false;
 let lives = 3;
@@ -540,13 +540,13 @@ class Bullet {
 
 
 
-function test() {
+function generateNewFrame() {
     if (play == false)
         return;
     artArea.clearRect(0, 0, canvasWidth, canvasHeight);
-    deleteCrossed();
     detectBirdCollision();
     filtering();
+    deleteCrossed();
 
 
     players.forEach((player) => {
@@ -609,14 +609,13 @@ function isPointInRectangle(pointX, pointY, ulX, ulY, width, height) {
     return (pointX >= ulX && pointX <= (ulX + width)) && (pointY >= ulY && pointY <= (ulY + height));
 }
 
-// killin function 
+// killing function 
 function detectBirdCollision() {
     //for each fire gun kill each  bird that match this condition 
     bullets.forEach((bullet) => {
-        pointX = bullet.currentX;
-        pointY = bullet.currentY;
         birds.forEach((bird) => {
-            if (isPointInRectangle(pointX, pointY, bird.currentX, bird.currentY, bird.width, bird.height)) {
+            if (isPointInRectangle(bullet.currentX + bullet.width, bullet.currentY, bird.currentX, bird.currentY, bird.width, bird.height) ||
+                isPointInRectangle(bullet.currentX + bullet.width, bullet.currentY + bullet.height, bird.currentX, bird.currentY, bird.width, bird.height)) {
                 bullet.ownerPlayer.incrementScore();
                 ////////////////////////////////////////////////////////////////////////////////////
                 bird.alive = false;
@@ -792,7 +791,7 @@ window.addEventListener('keyup', (e) => {
 
 
 
-setInterval(test, 25);      //generate  new frame every 30ms
+setInterval(generateNewFrame, 25);      //generate  new frame every 30ms
 
 
 function startNewGame() {
