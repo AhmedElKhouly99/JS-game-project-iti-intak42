@@ -31,6 +31,8 @@ const music = new Audio('sound/m.mp3');
 const b = new Audio('sound/b.wav');
 const c = new Audio('sound/c.wav');
 const f = new Audio('sound/f.wav');
+const l = new Audio('sound/l.wav');
+const e = new Audio('sound/e.wav');
 music.setAttribute('loop', 'true');
 music.volume = 0.15;
 let level = 1;
@@ -137,7 +139,6 @@ function removeDiv() {
 document.getElementById('menu-img').addEventListener('click', () => {
     if (confirm("Are You Sure !?")) {
         setting_menu = false;
-        console.log(setting_menu);
         removeTemplate(pause);
         displayMenu();
         artArea.clearRect(0, 0, canvas.width, canvas.height);
@@ -147,7 +148,6 @@ document.getElementById('menu-img').addEventListener('click', () => {
 document.getElementById('menu-img1').addEventListener('click', () => {
     if (confirm("Are You Sure !?")) {
         setting_menu = false;
-        console.log(setting_menu);
         removeTemplate(gameover);
         displayMenu();
         artArea.clearRect(0, 0, canvas.width, canvas.height);
@@ -157,8 +157,7 @@ document.getElementById('menu-img1').addEventListener('click', () => {
 document.getElementById('menu-img2').addEventListener('click', () => {
     if (confirm("Are You Sure !?")) {
         setting_menu = false;
-        console.log(setting_menu);
-        winTie.children[4].id = ''
+        winTie.children[4].id = '';
         removeTemplate(winTie);
         displayMenu();
         artArea.clearRect(0, 0, canvas.width, canvas.height);
@@ -229,6 +228,9 @@ function displayRankings() {
 
 function gameOver(score) {
     b.pause();
+    music.pause();
+    l.play();
+    setTimeout(playMusic, 3000);
     gameover.children[3].innerHTML = score;
     setting_menu = false;
     container.style.display = 'block';
@@ -278,7 +280,6 @@ restart.addEventListener('click', () => {
     removeTemplate(pause);
     removeDiv(this);
     startNewGame(['islam']);
-    console.log("Restarting Game");
     startNewGame();
 
 });
@@ -288,7 +289,6 @@ document.getElementById('restart-img1').addEventListener('click', () => {
     removeTemplate(gameover);
     removeDiv(this);
     startNewGame(['islam']);
-    console.log("Restarting Game");
     startNewGame();
 
 });
@@ -299,7 +299,6 @@ document.getElementById('restart-img2').addEventListener('click', () => {
     winTie.children[4].id = '';
     removeDiv(this);
     startNewGame(['islam']);
-    console.log("Restarting Game");
     startNewGame();
 
 });
@@ -310,6 +309,12 @@ function setPauseMenuScore(score) {
 }
 
 //////////////////////////////////////////////////////////////////////
+
+const frameRate = 40;
+const frameTimeOut = 1000 / frameRate;
+const maxTimeBetweenBirds = 500;
+
+
 const canvas = document.getElementById("canvas");
 
 const artArea = canvas.getContext('2d');
@@ -326,6 +331,7 @@ var bullets = [];
 
 var multiplayer = false;
 var players = [];
+
 
 
 
@@ -406,6 +412,19 @@ class Player {
         this.username = username;
 
     }
+    decrementLives(){
+        this.lives = Math.max(this.lives - 1, 0);
+        if(this.lives == 0){
+            this.die();
+        }
+
+    }
+
+    die(){
+        explosions.push(new Explosion(this.currentX, this.currentY, 1));
+        e.play();
+        console.log("Player Died");
+    }
 
     isAlive() {
         return this.lives >= 1;
@@ -423,7 +442,7 @@ class Player {
 
     incrementScore() {
         this.score++;
-        if (this.score % 10 == 0) {
+        if (this.score % 25 == 0) {
             this.incrementLives();
         }
     }
@@ -532,7 +551,54 @@ class Bullet {
     }
 }
 
+const explosion_image_paths = ['images/explosions/bird_explosion.png', 'images/explosions/rocket_explosion.png'];
+var explosions = [];
 
+class Explosion{
+    constructor(x, y, type){    //if bird, type = 0 but if spaceship, type = 1
+        this.currentX = x;
+        this.currentY = y;
+
+        this.width = 80;
+        this.height = 80;
+
+        this.explosionImage = new Image();
+        this.explosionImage.src = explosion_image_paths[type];
+
+        this.currentFrame = 0;
+        this.frameWidth = 128;
+        this.frameHight = 128;
+        this.frameCount = 64;
+        this.frameRows = 8;
+        this.framColumns = 8;
+
+        this.done = false;
+    }
+    draw(){
+        if(this.done){
+            return;
+        }
+        else{
+            var imageOffsetX = (this.currentFrame % this.frameRows) * this.frameWidth;
+            var imageOffsetY = Math.floor((this.currentFrame / this.framColumns)) * this.frameHight;
+            artArea.drawImage(this.explosionImage , imageOffsetX, imageOffsetY, this.frameWidth, this.frameHight, this.currentX, this.currentY, this.width, this.height);
+        }
+    }
+    updateState(){
+        this.currentFrame++;
+        if(this.currentFrame >= this.frameCount){
+            this.done = true;
+        }
+    }
+}
+
+
+function drawEplosions(){
+    explosions.forEach((explosion) => {
+        explosion.draw();
+        explosion.updateState();
+    })
+}
 
 
 
@@ -545,6 +611,7 @@ function generateNewFrame() {
         return;
     artArea.clearRect(0, 0, canvasWidth, canvasHeight);
     detectBirdCollision();
+    drawEplosions();
     filtering();
     deleteCrossed();
 
@@ -581,23 +648,30 @@ function ckeckLocalStorage(isMulti) {
 function checkEndOfGame() {
     if (!multiplayer) {   //Single Player
         if (!players[0].isAlive()) {
-            play = 0;
-            console.log("Game Over");
-            gameOver(players[0].score);
+            setTimeout(()=>{
+                play = false;
+                gameOver(players[0].score);
+                console.log("Game Over");
+            }, frameTimeOut * 64);
+            
+            
+            
             /////////////////////////////////////////////////////////////////////////////
         }
     }
     else {
         if (!(players[0].isAlive() || players[1].isAlive())) {
             console.log("Both Died");
-            play = false;
-            if (players[0].score == players[1].score) {   //Tie
-                displayWinnerTie('', players[0].score, true);
-            } else if (players[0].score > players[1].score) {  //Player 1 wins
-                displayWinnerTie(players[0].username, players[0].score, false)
-            } else {
-                displayWinnerTie(players[1].username, players[1].score, false)
-            }
+            setTimeout( () => {
+                play = false;
+                if (players[0].score == players[1].score) {   //Tie
+                    displayWinnerTie('', players[0].score, true);
+                } else if (players[0].score > players[1].score) {  //Player 1 wins
+                    displayWinnerTie(players[0].username, players[0].score, false)
+                } else {
+                    displayWinnerTie(players[1].username, players[1].score, false)
+                }
+            }, frameTimeOut * 64);
         }
     }
     ckeckLocalStorage(multiplayer);
@@ -618,6 +692,7 @@ function detectBirdCollision() {
                 isPointInRectangle(bullet.currentX + bullet.width, bullet.currentY + bullet.height, bird.currentX, bird.currentY, bird.width, bird.height)) {
                 bullet.ownerPlayer.incrementScore();
                 ////////////////////////////////////////////////////////////////////////////////////
+                explosions.push(new Explosion(bird.currentX, bird.currentY, 0));
                 bird.alive = false;
                 bullet.hitBird = true;
             }
@@ -633,13 +708,27 @@ function detectBirdCollision() {
 //removing killed bird and the fire 
 function filtering() {
     birds = birds.filter(bird => (bird.alive && (!bird.crossed)));
-    bullets = bullets.filter(bullet => (!(bullet.hitBird) && (!bullet.crossed)))
+    bullets = bullets.filter(bullet => (!(bullet.hitBird) && (!bullet.crossed)));
+    explosions = explosions.filter(explosion => !explosion.done);
 }
 
 //creating new bird after 400ms
+
+/*
 setInterval(() => {
     if (play) birds.push(new Bird());
 }, 400);
+*/
+
+
+function generateNewBird(){
+    if(play){
+        birds.push(new Bird());
+    }
+    setTimeout(generateNewBird, maxTimeBetweenBirds * Math.random());
+}
+
+generateNewBird();
 
 
 
@@ -660,13 +749,14 @@ function deleteCrossed() {
                     isPointInRectangle(bird.currentX, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height) ||
                     isPointInRectangle(bird.currentX + bird.width, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height)
                 ) {
-                    player.lives--;
+                    explosions.push(new Explosion(bird.currentX, bird.currentY, 0));
+                    player.decrementLives();
                     bird.crossed = true;
                 }
                 if (bird.currentX < (0 - bird.width)) {
                     bird.crossed = true;//remove birds that crossed the window
                     crossedBirds++;
-                    player.lives--;
+                    player.decrementLives();
                 }
             });
 
@@ -691,6 +781,7 @@ window.addEventListener('blur', () => {
     container.style.display = 'block';
     b.pause();
     if (setting_menu) {
+        removeTemplate(settings);
         displayTemplate(pause);
         if (multiplayer) {
             setPauseMenuScore((players[0].getScore() + ' : ' + players[1].getScore()));
@@ -791,7 +882,8 @@ window.addEventListener('keyup', (e) => {
 
 
 
-setInterval(generateNewFrame, 25);      //generate  new frame every 30ms
+
+setInterval(generateNewFrame, frameTimeOut);      //generate  new frame every 30ms
 
 
 function startNewGame() {
@@ -807,6 +899,7 @@ function startNewGame() {
 
     bullets = [];
     birds = [];
+    explosions = [];
 
     play = true;
     console.log("Game Started");
