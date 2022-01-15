@@ -6,6 +6,9 @@
 # Usage
 this project for learning and practice JavaScript
 
+# Note
+this game running stand alone you don`t need to refersh everthing is Dynamic into it.
+
 # Built With
 - Javascript
 - HTML
