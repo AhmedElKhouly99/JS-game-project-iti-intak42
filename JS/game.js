@@ -532,7 +532,7 @@ class Bullet {
     }
 }
 
-const explosion_images = ['images/explosions/bird_explosion.png', 'images/explosions/rocket_explosion.png'];
+const explosion_image_paths = ['images/explosions/bird_explosion.png', 'images/explosions/rocket_explosion.png'];
 var explosions = [];
 
 class Explosion{
@@ -544,7 +544,7 @@ class Explosion{
         this.height = 80;
 
         this.explosionImage = new Image();
-        this.explosionImage.src = 'images/explosions/bird_explosion.png';
+        this.explosionImage.src = explosion_image_paths[type];
 
         this.currentFrame = 0;
         this.frameWidth = 128;
@@ -562,9 +562,6 @@ class Explosion{
         else{
             var imageOffsetX = (this.currentFrame % this.frameRows) * this.frameWidth;
             var imageOffsetY = Math.floor((this.currentFrame / this.framColumns)) * this.frameHight;
-            console.log("__________________________________-");
-            console.log(imageOffsetX);
-            console.log(imageOffsetY);
             artArea.drawImage(this.explosionImage , imageOffsetX, imageOffsetY, this.frameWidth, this.frameHight, this.currentX, this.currentY, this.width, this.height);
         }
     }
@@ -685,7 +682,8 @@ function detectBirdCollision() {
 //removing killed bird and the fire 
 function filtering() {
     birds = birds.filter(bird => (bird.alive && (!bird.crossed)));
-    bullets = bullets.filter(bullet => (!(bullet.hitBird) && (!bullet.crossed)))
+    bullets = bullets.filter(bullet => (!(bullet.hitBird) && (!bullet.crossed)));
+    explosions = explosions.filter(explosion => !explosion.done);
 }
 
 //creating new bird after 400ms
@@ -859,6 +857,7 @@ function startNewGame() {
 
     bullets = [];
     birds = [];
+    explosions = [];
 
     play = true;
     console.log("Game Started");
