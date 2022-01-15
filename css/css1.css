@@ -273,8 +273,8 @@
     right: 0;
     left: 0;
     top:16%;
-    background-image: url("gameimg.jpg");
-    background-size: contain;
+    background-image: url("gameimg.PNG");
+    background-size:cover;
     width: 23%;
     height: 150px;
     margin: auto;
@@ -285,7 +285,7 @@
     position: absolute;
     right: 0;
     left: 0;
-    top:40%;
+    top:47%;
     width: 23%;
     margin: auto;
     font-family: initial;
