@@ -368,7 +368,7 @@ class Bird {
 
 
 const player1Conrollers = { up: 'ArrowUp', down: 'ArrowDown', right: 'ArrowRight', left: 'ArrowLeft', fire: ' ' };
-const player2Conrollers = { up: 'w', down: 's', right: 'd', left: 'a', fire: 'f' };
+const player2Conrollers = { up: 'w', down: 's', right: 'd', left: 'a', fire: '1' };
 
 class Player {
     constructor(playerStyle, username) {
