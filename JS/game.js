@@ -279,7 +279,6 @@ restart.addEventListener('click', () => {
 
     removeTemplate(pause);
     removeDiv(this);
-    startNewGame(['islam']);
     startNewGame();
 
 });
@@ -288,7 +287,6 @@ document.getElementById('restart-img1').addEventListener('click', () => {
 
     removeTemplate(gameover);
     removeDiv(this);
-    startNewGame(['islam']);
     startNewGame();
 
 });
@@ -298,7 +296,6 @@ document.getElementById('restart-img2').addEventListener('click', () => {
     removeTemplate(winTie);
     winTie.children[4].id = '';
     removeDiv(this);
-    startNewGame(['islam']);
     startNewGame();
 
 });
@@ -332,13 +329,20 @@ var bullets = [];
 var multiplayer = false;
 var players = [];
 
+const explosion_image_paths = ['images/explosions/bird_explosion.png', 'images/explosions/rocket_explosion.png'];
+var explosions = [];
 
 
-
+const player1Conrollers = { up: 'ArrowUp', down: 'ArrowDown', right: 'ArrowRight', left: 'ArrowLeft', fire: ' ' };
+const player2Conrollers = { up: 'w', down: 's', right: 'd', left: 'a', fire: '1' };
 
 var keyFlags = { 'w': false, 's': false, 'a': false, 'd': false, ' ': false, '1': false, 'ArrowUp': false, 'ArrowDown': false, 'ArrowLeft': false, 'ArrowRight': false };
 
 const delayBetweenFire = 200;
+
+
+
+/* ************************************************** Bird Class ************************************************** */
 
 class Bird {
     constructor() {
@@ -373,8 +377,11 @@ class Bird {
 }
 
 
-const player1Conrollers = { up: 'ArrowUp', down: 'ArrowDown', right: 'ArrowRight', left: 'ArrowLeft', fire: ' ' };
-const player2Conrollers = { up: 'w', down: 's', right: 'd', left: 'a', fire: '1' };
+
+
+
+/* ************************************************** Player Class ************************************************** */
+
 
 class Player {
     constructor(playerStyle, username) {
@@ -423,7 +430,6 @@ class Player {
     die(){
         explosions.push(new Explosion(this.currentX, this.currentY, 1));
         e.play();
-        console.log("Player Died");
     }
 
     isAlive() {
@@ -483,7 +489,6 @@ class Player {
     }
 
     fire() {
-        console.log("Firing a Bullet");
         bullets.push(new Bullet(this));
         f.play();
     }
@@ -499,12 +504,10 @@ class Player {
     }
     moveUp() {
         this.currentY = Math.max(this.currentY - this.speedY, 0);
-        console.log("Moving Up");
     }
 
     moveDown() {
         this.currentY = Math.min(this.currentY + this.speedY, canvasHeight - this.height);
-        console.log("Moving Down");
     }
 
     draw() {
@@ -516,13 +519,7 @@ class Player {
 
 }
 
-
-
-
-
-
-
-
+/* ************************************************** Bullet Class ************************************************** */
 
 class Bullet {
     constructor(player) {
@@ -551,8 +548,8 @@ class Bullet {
     }
 }
 
-const explosion_image_paths = ['images/explosions/bird_explosion.png', 'images/explosions/rocket_explosion.png'];
-var explosions = [];
+
+/* ************************************************** Explosion Class ************************************************** */
 
 class Explosion{
     constructor(x, y, type){    //if bird, type = 0 but if spaceship, type = 1
@@ -601,10 +598,7 @@ function drawEplosions(){
 }
 
 
-
-
-
-
+/* ************************************************** Global Functions ************************************************** */
 
 function generateNewFrame() {
     if (play == false)
@@ -651,17 +645,11 @@ function checkEndOfGame() {
             setTimeout(()=>{
                 play = false;
                 gameOver(players[0].score);
-                console.log("Game Over");
-            }, frameTimeOut * 64);
-            
-            
-            
-            /////////////////////////////////////////////////////////////////////////////
+            }, frameTimeOut * 64);            
         }
     }
     else {
-        if (!(players[0].isAlive() || players[1].isAlive())) {
-            console.log("Both Died");
+        if (!(players[0].isAlive() || players[1].isAlive())) {  //Both Died
             setTimeout( () => {
                 play = false;
                 if (players[0].score == players[1].score) {   //Tie
@@ -703,23 +691,12 @@ function detectBirdCollision() {
 }
 
 
-
-
 //removing killed bird and the fire 
 function filtering() {
     birds = birds.filter(bird => (bird.alive && (!bird.crossed)));
     bullets = bullets.filter(bullet => (!(bullet.hitBird) && (!bullet.crossed)));
     explosions = explosions.filter(explosion => !explosion.done);
 }
-
-//creating new bird after 400ms
-
-/*
-setInterval(() => {
-    if (play) birds.push(new Bird());
-}, 400);
-*/
-
 
 function generateNewBird(){
     if(play){
@@ -728,7 +705,6 @@ function generateNewBird(){
     setTimeout(generateNewBird, maxTimeBetweenBirds * Math.random());
 }
 
-generateNewBird();
 
 
 
@@ -769,29 +745,6 @@ function deleteCrossed() {
 
 
 
-window.addEventListener('focus', () => {
-    console.log("Playing");
-    // play = true;//to resume game 
-});
-
-
-
-window.addEventListener('blur', () => {
-    console.log("Pausing");
-    container.style.display = 'block';
-    b.pause();
-    if (setting_menu) {
-        removeTemplate(settings);
-        displayTemplate(pause);
-        if (multiplayer) {
-            setPauseMenuScore((players[0].getScore() + ' : ' + players[1].getScore()));
-        } else {
-            setPauseMenuScore(players[0].getScore());
-        }
-    }
-    play = false;//to pause game
-});
-
 
 
 function updateScore(multiplayer, Player) {
@@ -829,25 +782,35 @@ function drawLives(player, px, py) {
         lifes.src = "images/life1.png";
         artArea.drawImage(lifes, px, py, 60, 40);
     }
-    else {
-        //No Lives left
-        //play = 0;
+}
 
-        console.log("Player Died");
+
+function startNewGame() {
+    artArea.clearRect(0, 0, canvasWidth, canvasWidth);
+    
+    if (multiplayer == false) {   //Single Player
+        players = [new Player(1, playerNames[0])];
     }
+    else {
+        players = [new Player(1, playerNames[0]), new Player(2, playerNames[1])];
+    }
+    crossedBirds = 0;
+    
+    bullets = [];
+    birds = [];
+    explosions = [];
+    
+    play = true;
+    console.log("Game Started");
 }
 
 
 
 
-
+/* ************************************************** Event Listners ************************************************** */
 
 //control player movement
 window.addEventListener('keydown', (e) => {
-
-    console.log(e.key);
-
-
     keyFlags[e.key] = true;
 
     if (e.key == 'Escape') {
@@ -865,14 +828,7 @@ window.addEventListener('keydown', (e) => {
         }
         play = false;
     }
-
-
-
-
-
-
 });
-
 
 
 window.addEventListener('keyup', (e) => {
@@ -881,27 +837,24 @@ window.addEventListener('keyup', (e) => {
 
 
 
-
-
-setInterval(generateNewFrame, frameTimeOut);      //generate  new frame every 30ms
-
-
-function startNewGame() {
-    artArea.clearRect(0, 0, canvasWidth, canvasWidth);
-
-    if (multiplayer == false) {   //Single Player
-        players = [new Player(1, playerNames[0])];
+window.addEventListener('blur', () => {
+    container.style.display = 'block';
+    b.pause();
+    if (setting_menu) {
+        removeTemplate(settings);
+        displayTemplate(pause);
+        if (multiplayer) {
+            setPauseMenuScore((players[0].getScore() + ' : ' + players[1].getScore()));
+        } else {
+            setPauseMenuScore(players[0].getScore());
+        }
     }
-    else {
-        players = [new Player(1, playerNames[0]), new Player(2, playerNames[1])];
-    }
-    crossedBirds = 0;
+    play = false;//to pause game
+});
 
-    bullets = [];
-    birds = [];
-    explosions = [];
 
-    play = true;
-    console.log("Game Started");
-    console.log(players[0].username);
-}
+
+
+/* ************************* Functions to be called before game starts ************************* */
+generateNewBird();
+setInterval(generateNewFrame, frameTimeOut);      //generate  new frame every 25ms 
