@@ -540,7 +540,7 @@ class Bullet {
 
 
 
-function test() {
+function generateNewFrame() {
     if (play == false)
         return;
     artArea.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -792,7 +792,7 @@ window.addEventListener('keyup', (e) => {
 
 
 
-setInterval(test, 25);      //generate  new frame every 30ms
+setInterval(generateNewFrame, 25);      //generate  new frame every 30ms
 
 
 function startNewGame() {
