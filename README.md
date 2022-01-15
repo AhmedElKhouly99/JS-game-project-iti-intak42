@@ -9,6 +9,10 @@ this project for learning and practice JavaScript
 # Note
 this game running stand alone you don`t need to refersh everthing is Dynamic into it.
 
+# image
+
+![img](https://drive.google.com/uc?export=view&id=14CNvrIYu56nF-vNqjgi4qJ_GF49zC6ii)
+
 # Built With
 - Javascript
 - HTML
