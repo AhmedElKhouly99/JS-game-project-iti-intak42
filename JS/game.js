@@ -32,7 +32,7 @@ const b = new Audio('sound/b.wav');
 const c = new Audio('sound/c.wav');
 const f = new Audio('sound/f.wav');
 music.setAttribute('loop', 'true');
-music.volume = 0.4;
+music.volume = 0.15;
 let level = 1;
 let setting_menu = false;
 let lives = 3;
