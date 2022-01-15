@@ -275,6 +275,10 @@ document.getElementById('restart-img2').addEventListener('click', ()=>{
 });
 
 
+function setPauseMenuScore(score){
+    pause.children[3].innerHTML = score
+}
+
 //////////////////////////////////////////////////////////////////////
 const canvas = document.getElementById("canvas");
 
@@ -292,6 +296,7 @@ var bullets = [];
 
 var multiplayer = false;
 var players = [];
+
 
 
 var keyFlags = { 'w': false, 's': false, 'a': false, 'd': false, ' ': false, 'f': false, 'ArrowUp': false, 'ArrowDown': false, 'ArrowLeft': false, 'ArrowRight': false };
@@ -641,6 +646,11 @@ window.addEventListener('blur', () => {
     b.pause();
     if (setting_menu) {
         displayTemplate(pause);
+        if(multiplayer){
+            setPauseMenuScore(Math.max(players[0].getScore(), players[1].getScore()));
+        }else{
+            setPauseMenuScore(players[0].getScore());
+        }
     }
     play = false;//to pause game
 });
