@@ -670,7 +670,7 @@ function updateScore(multiplayer, Player) {
         
 
         artArea.fillText(player1.username + " 's score : " + player1.score, 50, 50);
-        drawLives(player1,canvasWidth-80,40);
+        drawLives(player1,canvasWidth-120,40);
     }
     else {
 
@@ -685,15 +685,15 @@ function drawLives(player, px, py) {
     let lifes = new Image();
     if (player.lives == 3) {
         lifes.src = "lives3.png";
-        artArea.drawImage(lifes,px,py,100,50 );
+        artArea.drawImage(lifes,px,py,60,40 );
     }
     else if (player.lives == 2) {
         lifes.src = "life2.png";
-        artArea.drawImage(lifes,px,py,100,50);
+        artArea.drawImage(lifes,px,py,60,40);
     }
     else if (player.lives == 1) {
         lifes.src = "life1.png";
-        artArea.drawImage(lifes,px,py,50,50);
+        artArea.drawImage(lifes,px,py,60,40);
     }
     else {
         //No Lives left
