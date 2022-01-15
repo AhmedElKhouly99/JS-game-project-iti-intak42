@@ -650,7 +650,7 @@ window.addEventListener('blur', () => {
     if (setting_menu) {
         displayTemplate(pause);
         if(multiplayer){
-            setPauseMenuScore(Math.max(players[0].getScore(), players[1].getScore()));
+            setPauseMenuScore((players[0].getScore()+' : ' +players[1].getScore()));
         }else{
             setPauseMenuScore(players[0].getScore());
         }
@@ -723,7 +723,7 @@ window.addEventListener('keydown', (e) => {
             displayTemplate(pause);
 
             if(multiplayer){
-                setPauseMenuScore(Math.max(players[0].getScore(), players[1].getScore()));
+                setPauseMenuScore((players[0].getScore()+' : ' +players[1].getScore()));
             }else{
                 setPauseMenuScore(players[0].getScore());
             }
