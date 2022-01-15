@@ -565,6 +565,20 @@ function test() {
     checkEndOfGame();
 }
 
+function ckeckLocalStorage(isMulti){
+    if(localStorage.getItem(players[0].username) == null){
+        localStorage.setItem(players[0].username, players[0].score);
+    }else if(JSON.parse(localStorage.getItem(players[0].username))<players[0].score){
+        localStorage.setItem(players[0].username, players[0].score);
+    }
+    if(isMulti){
+        if(localStorage.getItem(players[1].username) == null){
+            localStorage.setItem(players[1].username, players[1].score);
+        }else if(JSON.parse(localStorage.getItem(players[1].username))<players[1].score){
+            localStorage.setItem(players[1].username, players[1].score);
+        }
+    }
+}
 
 
 function checkEndOfGame(){
@@ -574,11 +588,12 @@ function checkEndOfGame(){
             console.log("Game Over");
             gameOver(players[0].score);
             /////////////////////////////////////////////////////////////////////////////
-            if(localStorage.getItem(players[0].username) == null){
-                localStorage.setItem(players[0].username, players[0].score);
-            }else if(JSON.parse(localStorage.getItem(players[0].username))<players[0].score){
-                localStorage.setItem(players[0].username, players[0].score);
-            }
+            // if(localStorage.getItem(players[0].username) == null){
+            //     localStorage.setItem(players[0].username, players[0].score);
+            // }else if(JSON.parse(localStorage.getItem(players[0].username))<players[0].score){
+            //     localStorage.setItem(players[0].username, players[0].score);
+            // }
+            // ckeckLocalStorage(multiplayer);
         }
     }
     else{
@@ -594,6 +609,7 @@ function checkEndOfGame(){
             }
         }
     }
+    ckeckLocalStorage(multiplayer);
 }
 
 
