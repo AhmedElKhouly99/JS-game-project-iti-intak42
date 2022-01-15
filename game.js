@@ -30,6 +30,7 @@ const mu_img = document.getElementById('music');
 const music = new Audio('m.mp3');
 const b = new Audio('b.wav');
 const c = new Audio('c.wav');
+const f = new Audio('f.wav');
 music.setAttribute('loop', 'true');
 let level = 1;
 let setting_menu = false;
@@ -142,11 +143,13 @@ document.getElementById('sound').addEventListener('click', () => {
     if (b.muted) {
         b.muted = false;
         c.muted = false;
+        f.muted = false;
         document.getElementById("sound").src = "images/Sound_BTN_active.png";
 
     } else {
         b.muted = true;
-        c.muted = true
+        c.muted = true;
+        f.muted = true;
         document.getElementById("sound").src = "images/Sound_BTN.png";
     }
 });
@@ -435,6 +438,7 @@ class Player {
     fire() {
         console.log("Firing a Bullet");
         bullets.push(new Bullet(this));
+        f.play();
     }
     moveRight() {
 
