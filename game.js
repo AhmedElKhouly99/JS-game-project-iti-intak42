@@ -27,10 +27,10 @@ const nickname2 = document.getElementById('nickname2');
 
 const so_img = document.getElementById('sound');
 const mu_img = document.getElementById('music');
-const music = new Audio('m.mp3');
-const b = new Audio('b.wav');
-const c = new Audio('c.wav');
-const f = new Audio('f.wav');
+const music = new Audio('sound/m.mp3');
+const b = new Audio('sound/b.wav');
+const c = new Audio('sound/c.wav');
+const f = new Audio('sound/f.wav');
 music.setAttribute('loop', 'true');
 let level = 1;
 let setting_menu = false;
@@ -349,7 +349,7 @@ class Bird {
         this.alive = true;
         this.crossed = false;
         this.birdImage = new Image();
-        this.birdImage.src = 'bird.png';
+        this.birdImage.src = 'images/bird.png';
         this.frameWidth = 473;
         this.frameHight = 468;
         this.currentFrame = 0;
@@ -386,11 +386,11 @@ class Player {
 
 
         if (playerStyle == 1) {
-            this.playerImage.src = 'player1.png';
+            this.playerImage.src = 'images/player1.png';
             this.controllers = player1Conrollers;
         }
         else {
-            this.playerImage.src = 'player2.png';
+            this.playerImage.src = 'images/player2.png';
             this.controllers = player2Conrollers;
         }
 
@@ -520,7 +520,7 @@ class Bullet {
         this.hitBird = false;
         this.crossed = false;
         this.fireImage = new Image();
-        this.fireImage.src = 'fire.png';
+        this.fireImage.src = 'images/fire.png';
 
 
     }
@@ -740,15 +740,15 @@ function updateScore(multiplayer, Player) {
 function drawLives(player, px, py) {
     let lifes = new Image();
     if (player.lives == 3) {
-        lifes.src = "lives3.png";
+        lifes.src = "images/lives3.png";
         artArea.drawImage(lifes,px,py,60,40 );
     }
     else if (player.lives == 2) {
-        lifes.src = "life2.png";
+        lifes.src = "images/life2.png";
         artArea.drawImage(lifes,px,py,60,40);
     }
     else if (player.lives == 1) {
-        lifes.src = "life1.png";
+        lifes.src = "images/life1.png";
         artArea.drawImage(lifes,px,py,60,40);
     }
     else {
