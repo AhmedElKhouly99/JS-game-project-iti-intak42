@@ -1,4 +1,4 @@
-# Birds Game by pure javascript (vanilla)
+# Beasts Game by pure javascript (vanilla)
 ## ITI students IoT and Telecom departments intake 42 (2022)
 ## Project for Javascript and HTML Course.
 
