@@ -341,7 +341,7 @@ const player2Conrollers = { up: 'w', down: 's', right: 'd', left: 'a', fire: '1'
 var keyFlags = { 'w': false, 's': false, 'a': false, 'd': false, ' ': false, '1': false, 'ArrowUp': false, 'ArrowDown': false, 'ArrowLeft': false, 'ArrowRight': false };
 
 const delayBetweenFire = 200;
-
+var gameEnded = false;
 
 
 /* ************************************************** Bird Class ************************************************** */
@@ -642,8 +642,12 @@ function ckeckLocalStorage(isMulti) {
 
 
 function checkEndOfGame() {
+    if(gameEnded)
+        return;
+    
     if (!multiplayer) {   //Single Player
         if (!players[0].isAlive()) {
+            gameEnded = true;
             setTimeout(()=>{
                 play = false;
                 gameOver(players[0].score);
@@ -652,6 +656,7 @@ function checkEndOfGame() {
     }
     else {
         if (!(players[0].isAlive() || players[1].isAlive())) {  //Both Died
+            gameEnded = true;
             setTimeout( () => {
                 play = false;
                 if (players[0].score == players[1].score) {   //Tie
@@ -803,6 +808,7 @@ function startNewGame() {
     explosions = [];
     
     play = true;
+    gameEnded = false;
     console.log("Game Started");
 }
 
