@@ -146,33 +146,33 @@
 }
 
   #medium {
-    top: 325px;
+    top: 50%;
   }
 
   #hard {
-    top: 442px;
+    top: 70%;
   }
 
   #sound, #music, #ok, #mute{
-    width: 75px;
-    height: 75px;
+    width: 6%;
+    height: 12%;
     cursor: pointer;
   }
 
   #sound{
     position: absolute;
-    top: -165px;
+    top: -25%;
     left: -17%;
   }
   #music{
     position: absolute;
-    top: 75px;
+    top: 13%;
     left: -17%;
   }
 
   #ok{
     position: absolute;
-    top: 355px;
+    top: 55%;
   }
 
   #mute{
@@ -194,10 +194,10 @@
     cursor: pointer;
   }
   #sound_btn{
-    top: 226px;
+    top: 35%;
   }
   #music_btn{
-    top: 350px;
+    top: 54%;
   }
 
   #score-box {
@@ -235,13 +235,13 @@
   }
 
   .icon{
-    width: 75px;
-    height: 75px;
+    width: 6%;
+    height: 12%;
   }
   
   #how-to-play #how-menu-btn {
-    width: 75px;
-    height: 75px;
+    width: 6%;
+    height: 12%;
     position: absolute;
     right: 0;
     top: 52%;
@@ -250,8 +250,8 @@
   }
   
   #restart-img, #setting-img, #menu-img, #close-img, #menu-img1, #menu-img2, #restart-img1, #restart-img2{
-    width: 75px;
-    height: 75px;
+    width: 6%;
+    height: 12%;
     position: absolute;
     right: 865px;
     top: 52%;
