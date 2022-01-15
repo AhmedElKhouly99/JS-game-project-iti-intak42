@@ -314,6 +314,11 @@ function setPauseMenuScore(score) {
 }
 
 //////////////////////////////////////////////////////////////////////
+
+const frameRate = 40;
+const frameTimeOut = 1000 / frameRate;
+
+
 const canvas = document.getElementById("canvas");
 
 const artArea = canvas.getContext('2d');
@@ -330,6 +335,7 @@ var bullets = [];
 
 var multiplayer = false;
 var players = [];
+
 
 
 
@@ -409,6 +415,18 @@ class Player {
 
         this.username = username;
 
+    }
+    decrementLives(){
+        this.lives = Math.max(this.lives - 1, 0);
+        if(this.lives == 0){
+            this.die();
+        }
+
+    }
+
+    die(){
+        explosions.push(new Explosion(this.currentX, this.currentY, 1));
+        console.log("Player Died");
     }
 
     isAlive() {
@@ -633,23 +651,30 @@ function ckeckLocalStorage(isMulti) {
 function checkEndOfGame() {
     if (!multiplayer) {   //Single Player
         if (!players[0].isAlive()) {
-            play = 0;
-            console.log("Game Over");
-            gameOver(players[0].score);
+            setTimeout(()=>{
+                play = false;
+                gameOver(players[0].score);
+                console.log("Game Over");
+            }, frameTimeOut * 64);
+            
+            
+            
             /////////////////////////////////////////////////////////////////////////////
         }
     }
     else {
         if (!(players[0].isAlive() || players[1].isAlive())) {
             console.log("Both Died");
-            play = false;
-            if (players[0].score == players[1].score) {   //Tie
-                displayWinnerTie('', players[0].score, true);
-            } else if (players[0].score > players[1].score) {  //Player 1 wins
-                displayWinnerTie(players[0].username, players[0].score, false)
-            } else {
-                displayWinnerTie(players[1].username, players[1].score, false)
-            }
+            setTimeout( () => {
+                play = false;
+                if (players[0].score == players[1].score) {   //Tie
+                    displayWinnerTie('', players[0].score, true);
+                } else if (players[0].score > players[1].score) {  //Player 1 wins
+                    displayWinnerTie(players[0].username, players[0].score, false)
+                } else {
+                    displayWinnerTie(players[1].username, players[1].score, false)
+                }
+            }, frameTimeOut * 64);
         }
     }
     ckeckLocalStorage(multiplayer);
@@ -714,13 +739,14 @@ function deleteCrossed() {
                     isPointInRectangle(bird.currentX, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height) ||
                     isPointInRectangle(bird.currentX + bird.width, bird.currentY + bird.height, player.currentX, player.currentY, player.width, player.height)
                 ) {
-                    player.lives--;
+                    explosions.push(new Explosion(bird.currentX, bird.currentY, 0));
+                    player.decrementLives();
                     bird.crossed = true;
                 }
                 if (bird.currentX < (0 - bird.width)) {
                     bird.crossed = true;//remove birds that crossed the window
                     crossedBirds++;
-                    player.lives--;
+                    player.decrementLives();
                 }
             });
 
@@ -846,7 +872,8 @@ window.addEventListener('keyup', (e) => {
 
 
 
-setInterval(generateNewFrame, 25);      //generate  new frame every 30ms
+
+setInterval(generateNewFrame, frameTimeOut);      //generate  new frame every 30ms
 
 
 function startNewGame() {
