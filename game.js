@@ -308,10 +308,10 @@ class Bird {
         /////////////////////////////////
         this.width = 80;
         this.height = 80;
-        this.speedX = 3;
-        this.speedY = 2;
+        this.speedX = Math.max(Math.random() *  10 * level, 2);
+        this.speedY = Math.random() *  50;
         this.currentX = canvasWidth;
-        this.currentY = this.speedY + Math.random() * (0.7 * (canvasHeight) - this.height);
+        this.currentY = this.speedY + Math.random() * (canvasHeight - 2 * this.speedY - this.height);
         this.alive = true;
         this.crossed = false;
         this.birdImage = new Image();
@@ -392,6 +392,9 @@ class Player {
 
     incrementScore() {
         this.score++;
+        if(this.score % 10 == 0){
+            this.incrementLives();
+        }
     }
 
     updateControllersStates() {
@@ -718,6 +721,13 @@ window.addEventListener('keydown', (e) => {
         b.pause();
         if (setting_menu) {
             displayTemplate(pause);
+
+            if(multiplayer){
+                setPauseMenuScore(Math.max(players[0].getScore(), players[1].getScore()));
+            }else{
+                setPauseMenuScore(players[0].getScore());
+            }
+            
         }
         play = false;
     }
