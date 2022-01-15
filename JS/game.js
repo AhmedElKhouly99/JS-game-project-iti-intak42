@@ -330,7 +330,7 @@ var players = [];
 
 
 
-var keyFlags = { 'w': false, 's': false, 'a': false, 'd': false, ' ': false, 'f': false, 'ArrowUp': false, 'ArrowDown': false, 'ArrowLeft': false, 'ArrowRight': false };
+var keyFlags = { 'w': false, 's': false, 'a': false, 'd': false, ' ': false, '1': false, 'ArrowUp': false, 'ArrowDown': false, 'ArrowLeft': false, 'ArrowRight': false };
 
 const delayBetweenFire = 200;
 
