@@ -276,20 +276,17 @@
     position: absolute;
     right: 0;
     left: 0;
-    top:16%;
-    background-image: url("../images/gameimg.PNG");
-    background-size:cover;
-    width: 23%;
-    height: 150px;
+    top:-51%;
+    width: 25%;
+    height:100px;
     margin: auto;
-    border-radius: 12px;
-    padding: 1%;
+    
   }
   #game-steps{
     position: absolute;
     right: 0;
     left: 0;
-    top:47%;
+    top:34%;
     width: 23%;
     margin: auto;
     font-family: initial;
