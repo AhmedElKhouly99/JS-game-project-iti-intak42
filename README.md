@@ -25,8 +25,8 @@ this game running stand alone you don`t need to refersh everthing is Dynamic int
 # Contributors
 - Ahmed El khouly
 - Asmaa Mohammed
-- islam Kortam
-- salma Mohammed
+- Islam Kortam
+- Salma Mohammed
 - Mustafa Hammad
 - Ahmed shafey
 
