@@ -278,7 +278,7 @@
     left: 0;
     top:-51%;
     width: 25%;
-    height:100px;
+    height:15%;
     margin: auto;
     
   }
@@ -288,14 +288,15 @@
     left: 0;
     top:34%;
     width: 23%;
+    height: 38%;
     margin: auto;
     font-family: initial;
     list-style-type:none ;
-
+    overflow: auto;
   }
   #game-steps li{
     text-align: initial;
-    font-size: 12px;
+    font-size: 70%;
     color: wheat;
   }
   #how-to-play #menu-img{

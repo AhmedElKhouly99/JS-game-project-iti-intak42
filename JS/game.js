@@ -93,8 +93,6 @@ function displayMenu() {
         removeTemplate(settings)
         displayTemplate(pause);
     } else {
-        // removeTemplate(gameover);
-        // gameover.style.display = 'none'
         for (let i = 0; i < mainMenu.length; i++) {
             mainMenu[i].style.display = 'inline';
         }
@@ -172,12 +170,16 @@ document.getElementById('sound').addEventListener('click', () => {
         b.muted = false;
         c.muted = false;
         f.muted = false;
+        l.muted = false;
+        e.muted = false;
         document.getElementById("sound").src = "images/Sound_BTN_active.png";
 
     } else {
         b.muted = true;
         c.muted = true;
         f.muted = true;
+        l.muted = true;
+        e.muted = true;
         document.getElementById("sound").src = "images/Sound_BTN.png";
     }
 });

@@ -27,7 +27,7 @@
     <img onclick="c.play();window.close();" style="width: 20%;cursor: pointer;" class="menu" id="Exit"
       src="images/Exit_BTN.png">
 
-    <img onclick="c.play(); displayTemplate(rankings);displayRankings();" style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;"
+    <img onclick="c.play(); removeMenu();displayTemplate(rankings);displayRankings();" style="width: 5%; float: left;cursor: pointer;position: absolute;bottom: 0%;left: 0;"
       class="menu" id="How_To_Play" src="images/Rating_BTN.png" onmouseleave="this.src='images/Rating_BTN.png'"
       onmouseover="this.src='images/Rating_BTN_on.png'">
     <a onclick="c.play()" href="https://github.com/AhmedElKhouly99/JS-game-project-iti-intak42.git" target="_blank">
@@ -59,18 +59,18 @@
       <img class="background" id="how-to-play-img" src="images/Table_01.png" alt="">
       <img id="game-img" src="images/gameimg.PNG">
       <ul id="game-steps">
-        <li style="color: #e3f5f4; font-size: 16px;">Single Player
+        <li style="color: #e3f5f4; font-size: 100%;">Single Player
           <ul>
             <li>For moving use up and down arrows</li>
             <li>for shooting use space bar</li>
           </ul>
         </li>
-        <li style="color: #e3f5f4; font-size: 16px;">Second Player
+        <li style="color: #e3f5f4; font-size: 100%;">Second Player
           <ul>
             <li>For moving use S and W keys</li>
             <li>for shooting use 1 key</li>
           </ul>
-          <li style="color: #e3f5f4; font-size: 16px;">Game Rules
+          <li style="color: #e3f5f4; font-size: 100%;">Game Rules
             <ul>
               <li>The player loses when finished three lives</li>
               <li>  lives increased by increasing the score</li>
